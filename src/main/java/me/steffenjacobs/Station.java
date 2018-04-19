@@ -1,6 +1,10 @@
 package me.steffenjacobs;
 
-/** @author Steffen Jacobs */
+/**
+ * Domain object of modelling a weather station
+ * 
+ * @author Steffen Jacobs
+ */
 public class Station {
 	private double lat, lng;
 	private String name, county;

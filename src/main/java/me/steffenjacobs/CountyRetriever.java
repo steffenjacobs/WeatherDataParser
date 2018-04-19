@@ -13,11 +13,17 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** @author Steffen Jacobs */
+/**
+ * This class can load the weather stations from climatecenter.fsu.edu and
+ * parses them using their latitude and longitude through geo.fcc.gov to get the
+ * associated county.
+ * 
+ * @author Steffen Jacobs
+ */
 public class CountyRetriever {
 
 	private static final Logger log = Logger.getLogger("main-logger");
-	
+
 	private static final String WEATHER_URL = "https://climatecenter.fsu.edu/climate-data-access-tools/downloadable-data";
 	private static final String AREA_URL = "https://geo.fcc.gov/api/census/area?lat=%s&lon=%s";
 
@@ -25,16 +31,19 @@ public class CountyRetriever {
 			"var latlng[0-9]* = new google\\.maps\\.LatLng\\(([0-9]+\\.[0-9]+), ([-]?[0-9]+\\.[0-9]+)\\);\\R*\\s+var marker[0-9]* = new google\\.maps\\.Marker\\(\\{\\R*\\s+position: latlng[0-9]*,\\R*\\s+title:\"([\\w\\s*]+)\"");
 	private static final Pattern PAT_JSON_COUNTY = Pattern.compile("\"county_name\":\"([\\w\\.?[-]?\\s*]+)\",");
 
-
 	public static void main(String[] args) throws Exception {
+		// retrieve web page from climatecenter
 		String htmlString = sendGet(WEATHER_URL);
 		Matcher matcher = PAT_LONGLAT.matcher(htmlString);
 		List<Station> stations = new ArrayList<>();
+
+		// retrieve stations from HTML document
 		while (matcher.find()) {
 			Station station = new Station(Double.parseDouble(matcher.group(1)), Double.parseDouble(matcher.group(2)), matcher.group(3));
 			stations.add(station);
 		}
 
+		// retrieve county from geo.fcc.gov via latitude and longitude
 		for (Station station : stations) {
 			String html = sendGet(String.format(AREA_URL, station.getLat(), station.getLng()));
 			Matcher matcher2 = PAT_JSON_COUNTY.matcher(html);
@@ -49,6 +58,10 @@ public class CountyRetriever {
 
 	}
 
+	/**
+	 * @return a String containg the httml response of a get request with an
+	 *         empty header to <i>url</i>
+	 */
 	private static String sendGet(String url) throws MalformedURLException, IOException {
 
 		HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -64,5 +77,4 @@ public class CountyRetriever {
 
 		return response.toString();
 	}
-
 }
