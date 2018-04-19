@@ -28,7 +28,7 @@ public class CountyRetriever {
 	private static final String AREA_URL = "https://geo.fcc.gov/api/census/area?lat=%s&lon=%s";
 
 	private static final Pattern PAT_LONGLAT = Pattern.compile(
-			"var latlng[0-9]* = new google\\.maps\\.LatLng\\(([0-9]+\\.[0-9]+), ([-]?[0-9]+\\.[0-9]+)\\);\\R*\\s+var marker[0-9]* = new google\\.maps\\.Marker\\(\\{\\R*\\s+position: latlng[0-9]*,\\R*\\s+title:\"([\\w\\s*]+)\"");
+			"var latlng([0-9]*) = new google\\.maps\\.LatLng\\(([0-9]+\\.[0-9]+), ([-]?[0-9]+\\.[0-9]+)\\);\\R*\\s+var marker[0-9]* = new google\\.maps\\.Marker\\(\\{\\R*\\s+position: latlng[0-9]*,\\R*\\s+title:\"([\\w\\s*]+)\"");
 	private static final Pattern PAT_JSON_COUNTY = Pattern.compile("\"county_name\":\"([\\w\\.?[-]?\\s*]+)\",");
 
 	public static void main(String[] args) throws Exception {
@@ -39,7 +39,7 @@ public class CountyRetriever {
 
 		// retrieve stations from HTML document
 		while (matcher.find()) {
-			Station station = new Station(Double.parseDouble(matcher.group(1)), Double.parseDouble(matcher.group(2)), matcher.group(3));
+			Station station = new Station(Integer.parseInt(matcher.group(1)), Double.parseDouble(matcher.group(2)), Double.parseDouble(matcher.group(3)), matcher.group(4));
 			stations.add(station);
 		}
 
@@ -53,7 +53,7 @@ public class CountyRetriever {
 				station.setCounty(matcher2.group(1));
 			}
 
-			System.out.println(String.format("%s: Lat: %s, Lng: %s, County: %s", station.getName(), station.getLat(), station.getLng(), station.getCounty()));
+			System.out.println(String.format("%s (%s): Lat: %s, Lng: %s, County: %s", station.getName(), station.getStationId(), station.getLat(), station.getLng(), station.getCounty()));
 		}
 
 	}

@@ -6,11 +6,13 @@ package me.steffenjacobs;
  * @author Steffen Jacobs
  */
 public class Station {
+	private int stationId;
 	private double lat, lng;
 	private String name, county;
 
-	public Station(double lat, double lng, String name) {
+	public Station(int stationId, double lat, double lng, String name) {
 		super();
+		this.stationId = stationId;
 		this.lat = lat;
 		this.lng = lng;
 		this.name = name;
@@ -18,6 +20,14 @@ public class Station {
 
 	public Station() {
 
+	}
+
+	public int getStationId() {
+		return stationId;
+	}
+
+	public void setStationId(int stationId) {
+		this.stationId = stationId;
 	}
 
 	public double getLat() {
@@ -55,7 +65,9 @@ public class Station {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Station [lat=");
+		builder.append("Station [stationId=");
+		builder.append(stationId);
+		builder.append(", lat=");
 		builder.append(lat);
 		builder.append(", lng=");
 		builder.append(lng);
