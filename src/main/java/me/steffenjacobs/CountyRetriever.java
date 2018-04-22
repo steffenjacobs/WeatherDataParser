@@ -7,7 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -32,15 +34,21 @@ public class CountyRetriever {
 	private static final Pattern PAT_JSON_COUNTY = Pattern.compile("\"county_name\":\"([\\w\\.?[-]?\\s*]+)\",");
 
 	public static void main(String[] args) throws Exception {
+		getCountyForStation();
+
+	}
+
+	protected static Map<Integer, Station> getCountyForStation() throws MalformedURLException, IOException {
 		// retrieve web page from climatecenter
 		String htmlString = sendGet(WEATHER_URL);
 		Matcher matcher = PAT_LONGLAT.matcher(htmlString);
 		List<Station> stations = new ArrayList<>();
-
+		Map<Integer, Station> stationMap = new HashMap<>(); 
 		// retrieve stations from HTML document
 		while (matcher.find()) {
 			Station station = new Station(Integer.parseInt(matcher.group(1)), Double.parseDouble(matcher.group(2)), Double.parseDouble(matcher.group(3)), matcher.group(4));
 			stations.add(station);
+			stationMap.put(station.getStationId(), station);
 		}
 
 		// retrieve county from geo.fcc.gov via latitude and longitude
@@ -55,7 +63,8 @@ public class CountyRetriever {
 
 			System.out.println(String.format("%s (%s): Lat: %s, Lng: %s, County: %s", station.getName(), station.getStationId(), station.getLat(), station.getLng(), station.getCounty()));
 		}
-
+		
+		return stationMap;
 	}
 
 	/**
