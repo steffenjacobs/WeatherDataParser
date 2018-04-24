@@ -2,3 +2,7 @@ bin/*
 .settings/*
 .classpath
 .project
+
+#IntelliJ
+*.iml
+/.idea/
