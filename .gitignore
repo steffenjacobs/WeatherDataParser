@@ -7,3 +7,5 @@ bin/*
 *.iml
 /.idea/
 /out/
+
+*.csv
