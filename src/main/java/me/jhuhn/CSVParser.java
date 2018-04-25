@@ -9,14 +9,16 @@ import java.io.PrintWriter;
 public class CSVParser {
 
 	public static void main(String[] args) throws IOException {
-		boolean debug = true;
+		boolean debug = false;
 		String seperator = "|";
 		PrintWriter writer = new PrintWriter("data_set_modified_by_jo.csv", "UTF-8");
-        BufferedReader br = new BufferedReader(new FileReader(new File("data_set_original.csv")));
-        
+        BufferedReader br = new BufferedReader(new FileReader(new File("data_set_original.csv")));        
         String oneLine = "";
         int k = 0;
-        while ((oneLine = br.readLine()) != null) {
+        
+        
+        
+        while ( (oneLine = br.readLine()) != null) {
         	if(debug)
            System.out.println(oneLine);
            
