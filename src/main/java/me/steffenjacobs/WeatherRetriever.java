@@ -23,10 +23,10 @@ import java.util.StringJoiner;
 
 public class WeatherRetriever {
 
-	static DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+	static DecimalFormat NUMBER_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
 
 	public static void post() {
-		numberFormat.applyPattern("0.00000");
+		NUMBER_FORMAT.applyPattern("0.00000");
 		Locale.setDefault(new Locale("en", "US"));
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData.csv"));) {
@@ -84,9 +84,9 @@ public class WeatherRetriever {
 								continue;
 							}
 						} else {
-							String newLine = createLine(countyForStation.get(stationId), line);
-							System.out.print(newLine);
-							pw.write(newLine);
+							CsvEntry csvEntry = new CsvEntry(countyForStation.get(stationId), line);
+							System.out.println(csvEntry.toString());
+							pw.write(csvEntry.toString());
 						}
 					}
 					http.disconnect();
@@ -102,45 +102,6 @@ public class WeatherRetriever {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-	}
-
-	private static String createLine(Station station, String line) {
-		String[] split = line.split(",");
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < split.length; i++) {
-			if (!split[i].trim().equals("")) {
-				sb.append(split[i] + ",");
-			}
-			
-			switch (i) {
-			case 3:
-				sb.append(split[1] + "-" + split[2] + "-" + split[3] + ",");
-				break;
-			case 4:
-				sb.append((Double.valueOf(split[4]) > 0 ? true : Double.valueOf(split[4]) < 0 ? "null" : false) + ",");
-				break;
-			case 7:
-				try {
-					String meanTemp = split[7].trim();
-					if (split[7].trim().equals("")) {
-						meanTemp = numberFormat.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
-						sb.append(meanTemp + ",");
-					}
-					if (meanTemp.trim().equals("-99.90000")) {
-						sb.append("-99.99000,");
-					} else {
-						sb.append(numberFormat.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
-					}
-					sb.append(station.getCounty());
-				} catch (NumberFormatException e) {
-					System.err.println("number missing");
-					System.exit(0);
-				}
-				break;
-			}
-		}
-		sb.append("\n");
-		return sb.toString();
 	}
 
 	private static String createHeader(String line) {
