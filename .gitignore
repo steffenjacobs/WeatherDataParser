@@ -6,3 +6,4 @@ bin/*
 #IntelliJ
 *.iml
 /.idea/
+/out/
