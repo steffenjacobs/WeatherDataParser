@@ -58,12 +58,7 @@ public class CsvEntry {
     }
 
     private String getDateString() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, this.year);
-        calendar.set(Calendar.MONTH, this.month);
-        calendar.set(Calendar.DAY_OF_MONTH, this.day);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        return dateFormat.format(calendar.getTime());
+        return this.year + "-" + this.month + "-" + this.day;
     }
 
     public double getPrecipitation() {
