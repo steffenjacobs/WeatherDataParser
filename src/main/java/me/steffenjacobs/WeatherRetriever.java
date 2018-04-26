@@ -23,10 +23,10 @@ import java.util.StringJoiner;
 
 public class WeatherRetriever {
 
-	static DecimalFormat NUMBER_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+	static DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
 
 	public static void post() {
-		NUMBER_FORMAT.applyPattern("0.00000");
+		numberFormat.applyPattern("0.00000");
 		Locale.setDefault(new Locale("en", "US"));
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData.csv"));) {
@@ -45,7 +45,7 @@ public class WeatherRetriever {
 				arguments.put("down_station", String.valueOf(stationId));
 				arguments.put("down_Submit", "Download+File");
 				arguments.put("down_time", "1");
-				arguments.put("down_time_end", "10");
+				arguments.put("down_time_end", "12");
 				arguments.put("down_variable", "all");
 				arguments.put("down_year", "2010");
 				arguments.put("down_year_end", "2016");
@@ -84,9 +84,9 @@ public class WeatherRetriever {
 								continue;
 							}
 						} else {
-							CsvEntry csvEntry = new CsvEntry(countyForStation.get(stationId), line);
-							System.out.println(csvEntry.toString());
-							pw.write(csvEntry.toString());
+							String newLine = createLine(countyForStation.get(stationId), line);
+							System.out.print(newLine);
+							pw.write(newLine);
 						}
 					}
 					http.disconnect();
@@ -104,23 +104,62 @@ public class WeatherRetriever {
 		}
 	}
 
+	private static String createLine(Station station, String line) {
+		String[] split = line.split(",");
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < split.length; i++) {
+			if (!split[i].trim().equals("")) {
+				sb.append(split[i] + ",");
+			}
+
+			switch (i) {
+				case 3:
+					sb.append(split[1] + "-" + split[2] + "-" + split[3] + ",");
+					break;
+				case 4:
+					sb.append((Double.valueOf(split[4]) > 0 ? true : Double.valueOf(split[4]) < 0 ? "null" : false) + ",");
+					break;
+				case 7:
+					try {
+						String meanTemp = split[7].trim();
+						if (split[7].trim().equals("")) {
+							meanTemp = numberFormat.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
+							sb.append(meanTemp + ",");
+						}
+						if (meanTemp.trim().equals("-99.90000")) {
+							sb.append("-99.99000,");
+						} else {
+							sb.append(numberFormat.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
+						}
+						sb.append(station.getCounty());
+					} catch (NumberFormatException e) {
+						System.err.println("number missing");
+						System.exit(0);
+					}
+					break;
+			}
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
+
 	private static String createHeader(String line) {
 		String[] header = line.split(",");
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < header.length; i++) {
 			sb.append(header[i] + ",");
 			switch (i) {
-			case 3:
-				sb.append(" DATE,");
-				break;
-			case 4:
-				sb.append(" IsPrecipitation,");
-				break;
-			case 7:
-				sb.append(" MEAN TEMP(Celsius),");
-				sb.append(" COUNTY");
-			default:
-				break;
+				case 3:
+					sb.append(" DATE,");
+					break;
+				case 4:
+					sb.append(" IsPrecipitation,");
+					break;
+				case 7:
+					sb.append(" MEAN TEMP(Celsius),");
+					sb.append(" COUNTY");
+				default:
+					break;
 			}
 		}
 		return sb.toString();
