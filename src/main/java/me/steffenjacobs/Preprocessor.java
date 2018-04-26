@@ -1,7 +1,5 @@
 package me.steffenjacobs;
 
-import me.steffenjacobs.*;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
