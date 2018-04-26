@@ -23,10 +23,10 @@ import java.util.StringJoiner;
 
 public class WeatherRetriever {
 
-	static DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+	static DecimalFormat NUMBER_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
 
 	public static void post() {
-		numberFormat.applyPattern("0.00000");
+		NUMBER_FORMAT.applyPattern("0.00000");
 		Locale.setDefault(new Locale("en", "US"));
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData.csv"));) {
@@ -123,13 +123,13 @@ public class WeatherRetriever {
 					try {
 						String meanTemp = split[7].trim();
 						if (split[7].trim().equals("")) {
-							meanTemp = numberFormat.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
+							meanTemp = NUMBER_FORMAT.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
 							sb.append(meanTemp + ",");
 						}
 						if (meanTemp.trim().equals("-99.90000")) {
 							sb.append("-99.99000,");
 						} else {
-							sb.append(numberFormat.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
+							sb.append(NUMBER_FORMAT.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
 						}
 						sb.append(station.getCounty());
 					} catch (NumberFormatException e) {
