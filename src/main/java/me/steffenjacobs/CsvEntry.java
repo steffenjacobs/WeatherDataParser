@@ -1,7 +1,10 @@
 package me.steffenjacobs;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,6 +21,7 @@ public class CsvEntry {
     private int minTemp;
     private double meanTemp;
     private String county;
+    private String weekday;
 
     public CsvEntry(String line) {
         String[] split = line.split(",");
@@ -30,6 +34,7 @@ public class CsvEntry {
         minTemp = (int) Double.parseDouble(split[8]);
         meanTemp = Double.parseDouble(split[9]);
         county = split[11];
+        setWeekday();
     }
 
     public String toString() {
@@ -46,19 +51,16 @@ public class CsvEntry {
         stringBuilder.append(meanTemp).append(",");
         stringBuilder.append(Double.parseDouble(NUMBER_FORMAT.format(meanTemp == -99.90000 ? meanTemp :
                 ((meanTemp - 32) * 5) / 9))).append(",");
-        stringBuilder.append(county).append("\n");
+        stringBuilder.append(county).append(",");
+        stringBuilder.append(weekday).append("\n");
         return stringBuilder.toString();
     }
 
     public boolean equals(CsvEntry other) {
-        if(this.county == null || other.county == null)  {
+        if (this.county == null || other.county == null) {
             return false;
         }
         return this.county.equals(other.getCounty()) && this.getDateString().equals(other.getDateString());
-    }
-
-    private String getDateString() {
-        return this.year + "-" + this.month + "-" + this.day;
     }
 
     public double getPrecipitation() {
@@ -96,4 +98,19 @@ public class CsvEntry {
     public String getCounty() {
         return county;
     }
+
+    private String getDateString() {
+        return this.year + "-" + this.month + "-" + this.day;
+    }
+
+    private void setWeekday() {
+        try {
+            LocalDate localDate = LocalDate.of(this.year, this.month, this.day);
+            java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+            weekday = dayOfWeek.toString();
+        } catch(DateTimeException e) {
+            weekday = "";
+        }
+    }
+
 }

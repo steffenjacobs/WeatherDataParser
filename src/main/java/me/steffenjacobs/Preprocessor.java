@@ -83,7 +83,7 @@ public class Preprocessor {
     private static void createNewExcelFile(Map<CsvEntry, Map<String, AverageList>> entriesToValues) {
         try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData_preprocessed.csv"))) {
             pw.write("COOPID,YEAR,MONTH,DAY,DATE,PRECIPITATION,IsPrecipitation,MAX TEMP,MIN TEMP, MEAN TEMP,MEAN TEMP" +
-                    " (Celsius),COUNTY\n");
+                    " (Celsius),COUNTY,WEEKDAY\n");
             for (Map.Entry<CsvEntry, Map<String, AverageList>> entry : entriesToValues.entrySet()) {
                 CsvEntry csvEntry = entry.getKey();
                 Map<String, AverageList> values = entry.getValue();
@@ -95,7 +95,6 @@ public class Preprocessor {
                 csvEntry.setMinTemp(minTempList.getAverage());
                 DoubleAverageList meanTempList = (DoubleAverageList) values.get(MEAN_TEMPERATURE);
                 csvEntry.setMeanTemp(meanTempList.getAverage());
-                System.out.println(csvEntry.toString());
                 pw.write(csvEntry.toString());
             }
         } catch (IOException e) {
