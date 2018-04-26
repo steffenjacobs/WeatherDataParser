@@ -81,7 +81,7 @@ public class Preprocessor {
     }
 
     private static void createNewExcelFile(Map<CsvEntry, Map<String, AverageList>> entriesToValues) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData_new.csv"))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData_preprocessed.csv"))) {
             pw.write("COOPID,YEAR,MONTH,DAY,DATE,PRECIPITATION,IsPrecipitation,MAX TEMP,MIN TEMP, MEAN TEMP,MEAN TEMP" +
                     " (Celsius),COUNTY\n");
             for (Map.Entry<CsvEntry, Map<String, AverageList>> entry : entriesToValues.entrySet()) {
