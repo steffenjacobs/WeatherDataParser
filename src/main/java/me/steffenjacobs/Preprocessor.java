@@ -1,6 +1,12 @@
 package me.steffenjacobs;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +18,7 @@ public class Preprocessor {
     private static String MEAN_TEMPERATURE = "meanTemp";
 
     public static void processExcelFile() {
-        Map<CsvEntry, Map<String, AverageList>> entriesToValues = new HashMap<>();
+        Map<CsvEntry, Wrapper> entriesToValues = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(new File("weatherData.csv")))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -29,17 +35,23 @@ public class Preprocessor {
         createNewExcelFile(entriesToValues);
     }
 
-    private static void createCsvEntry(Map<CsvEntry, Map<String, AverageList>> entriesToValues, String line) {
+    private static void createCsvEntry(Map<CsvEntry, Wrapper> entriesToValues, String line) {
         boolean isEqual = false;
         CsvEntry csvEntry = new CsvEntry(line);
         CsvEntry other = null;
-        for (CsvEntry entry : entriesToValues.keySet()) {
-            isEqual = csvEntry.equals(entry);
-            if (isEqual) {
-                other = entry;
-                break;
-            }
+//        System.out.println(entriesToValues.containsKey(csvEntry));
+        if (entriesToValues.containsKey(csvEntry)) {
+//        	System.out.println("contin");
+        	isEqual = true;
+        	other = entriesToValues.get(csvEntry).getLine();
         }
+//        for (CsvEntry entry : entriesToValues.keySet()) {
+//            isEqual = csvEntry.equals(entry);
+//            if (isEqual) {
+//                other = entry;
+//                break;
+//            }
+//        }
         if (isEqual) {
             addCsvEntryToMap(entriesToValues, csvEntry, other);
         } else {
@@ -47,9 +59,9 @@ public class Preprocessor {
         }
     }
 
-    private static void addCsvEntryToMap(Map<CsvEntry, Map<String, AverageList>> entriesToValues, CsvEntry csvEntry,
+    private static void addCsvEntryToMap(Map<CsvEntry, Wrapper> entriesToValues, CsvEntry csvEntry,
                                          CsvEntry other) {
-        Map values = entriesToValues.get(other);
+        Map values = entriesToValues.get(other).getMap();
         DoubleAverageList precipitationList = (DoubleAverageList) values.get(PRECIPITATION);
         precipitationList.addValue(csvEntry.getPrecipitation());
         IntegerAverageList maxTempList = (IntegerAverageList) values.get(MAX_TEMPERATURE);
@@ -60,7 +72,7 @@ public class Preprocessor {
         meanTempList.addValue(csvEntry.getMeanTemp());
     }
 
-    private static void createMapForCsvEntry(Map<CsvEntry, Map<String, AverageList>> entriesToValues, CsvEntry
+    private static void createMapForCsvEntry(Map<CsvEntry, Wrapper> entriesToValues, CsvEntry
             csvEntry) {
         Map<String, AverageList> values = new HashMap<>();
         DoubleAverageList precipitationList = new DoubleAverageList();
@@ -75,16 +87,17 @@ public class Preprocessor {
         DoubleAverageList meanTempList = new DoubleAverageList();
         meanTempList.addValue(csvEntry.getMeanTemp());
         values.put(MEAN_TEMPERATURE, meanTempList);
-        entriesToValues.put(csvEntry, values);
+        
+        entriesToValues.put(csvEntry, new Wrapper(csvEntry, values));
     }
 
-    private static void createNewExcelFile(Map<CsvEntry, Map<String, AverageList>> entriesToValues) {
+    private static void createNewExcelFile(Map<CsvEntry, Wrapper> entriesToValues) {
         try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData_preprocessed.csv"))) {
             pw.write("COOPID,YEAR,MONTH,DAY,DATE,PRECIPITATION,IsPrecipitation,MAX TEMP,MIN TEMP, MEAN TEMP,MEAN TEMP" +
                     " (Celsius),COUNTY,WEEKDAY\n");
-            for (Map.Entry<CsvEntry, Map<String, AverageList>> entry : entriesToValues.entrySet()) {
+            for (Map.Entry<CsvEntry, Wrapper> entry : entriesToValues.entrySet()) {
                 CsvEntry csvEntry = entry.getKey();
-                Map<String, AverageList> values = entry.getValue();
+                Map<String, AverageList> values = entry.getValue().getMap();
                 DoubleAverageList precipitationList = (DoubleAverageList) values.get(PRECIPITATION);
                 csvEntry.setPrecipitation(precipitationList.getAverage());
                 IntegerAverageList maxTempList = (IntegerAverageList) values.get(MAX_TEMPERATURE);

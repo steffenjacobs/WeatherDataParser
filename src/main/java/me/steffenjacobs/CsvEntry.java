@@ -51,12 +51,51 @@ public class CsvEntry {
         return stringBuilder.toString();
     }
 
-    public boolean equals(CsvEntry other) {
-        if (this.county == null || other.county == null) {
-            return false;
-        }
-        return this.county.equals(other.getCounty()) && this.getDateString().equals(other.getDateString());
-    }
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((county == null) ? 0 : county.hashCode());
+		result = prime * result + day;
+		result = prime * result + month;
+		result = prime * result + year;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CsvEntry other = (CsvEntry) obj;
+		if (county == null) {
+			if (other.county != null)
+				return false;
+		} else if (!county.equals(other.county))
+			return false;
+		if (day != other.day)
+			return false;
+		if (month != other.month)
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
+	}
+    
+    
+    
+    
+//    public boolean equals(CsvEntry other) {
+//    	System.out.println("equl");
+//        if (this.county == null || other.county == null) {
+//            return false;
+//        }
+//        return this.county.equals(other.getCounty()) && this.getDateString().equals(other.getDateString());
+//    }
 
     public double getPrecipitation() {
         return precipitation;
