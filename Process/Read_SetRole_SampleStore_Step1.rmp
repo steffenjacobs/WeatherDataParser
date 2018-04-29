@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="8.1.003">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.000">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="8.1.003" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.1.000" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,8 +12,8 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="read_csv" compatibility="8.1.003" expanded="true" height="68" name="Read CSV" width="90" x="112" y="34">
-        <parameter key="csv_file" value="C:\Users\lukas\git\WeatherDataParser\data_set_modified_by_jo.csv"/>
+      <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="112" y="34">
+        <parameter key="csv_file" value="E:\effectivelearning\workspace\WeatherDataParser\data_set_modified_by_jo.csv"/>
         <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
         <parameter key="use_quotes" value="true"/>
@@ -68,21 +68,21 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="8.1.003" expanded="true" height="82" name="Set Role" width="90" x="246" y="34">
+      <operator activated="true" class="set_role" compatibility="8.1.000" expanded="true" height="82" name="Set Role" width="90" x="246" y="34">
         <parameter key="attribute_name" value="violation_raw"/>
         <parameter key="target_role" value="label"/>
         <list key="set_additional_roles">
           <parameter key="id" value="id"/>
         </list>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="380" y="34">
+      <operator activated="true" class="sample_stratified" compatibility="8.1.000" expanded="true" height="82" name="Sample (Stratified)" width="90" x="380" y="34">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="150000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="648" y="34">
+      <operator activated="true" class="store" compatibility="8.1.000" expanded="true" height="68" name="Store" width="90" x="648" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/SubsetPoliceReport200K"/>
       </operator>
       <connect from_op="Read CSV" from_port="output" to_op="Set Role" to_port="example set input"/>
