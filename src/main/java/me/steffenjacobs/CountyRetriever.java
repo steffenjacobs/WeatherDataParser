@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  */
 public class CountyRetriever {
 
-	private static final Logger log = Logger.getLogger("main-logger");
+	private static final Logger log = Logger.getLogger("county-retriever-logger");
 
 	private static final String WEATHER_URL = "https://climatecenter.fsu.edu/climate-data-access-tools/downloadable-data";
 	private static final String AREA_URL = "https://geo.fcc.gov/api/census/area?lat=%s&lon=%s";
@@ -43,7 +43,7 @@ public class CountyRetriever {
 		String htmlString = sendGet(WEATHER_URL);
 		Matcher matcher = PAT_LONGLAT.matcher(htmlString);
 		List<Station> stations = new ArrayList<>();
-		Map<Integer, Station> stationMap = new HashMap<>(); 
+		Map<Integer, Station> stationMap = new HashMap<>();
 		// retrieve stations from HTML document
 		while (matcher.find()) {
 			Station station = new Station(Integer.parseInt(matcher.group(1)), Double.parseDouble(matcher.group(2)), Double.parseDouble(matcher.group(3)), matcher.group(4));
@@ -61,9 +61,12 @@ public class CountyRetriever {
 				station.setCounty(matcher2.group(1));
 			}
 
-			System.out.println(String.format("%s (%s): Lat: %s, Lng: %s, County: %s", station.getName(), station.getStationId(), station.getLat(), station.getLng(), station.getCounty()));
+			log.log(Level.FINE, "{0} ({1}): Lat: {2}, Lng: {3}, County: {4}",
+					new Object[] { station.getName(), station.getStationId(), station.getLat(), station.getLng(), station.getCounty() });
 		}
-		
+
+		log.log(Level.INFO, "retrieved counties for {0} stations.\n", stationMap.keySet().size());
+
 		return stationMap;
 	}
 
@@ -77,7 +80,7 @@ public class CountyRetriever {
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
-		StringBuffer response = new StringBuffer();
+		StringBuilder response = new StringBuilder();
 
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
