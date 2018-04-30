@@ -128,14 +128,14 @@
       </operator>
       <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.000" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="782" y="34">
         <list key="parameters">
-          <parameter key="ID3.minimal_size_for_split" value="[0.0;100;5;linear]"/>
+          <parameter key="ID3.criterion" value="information_gain,gini_index,accuracy,gain_ratio"/>
+          <parameter key="ID3.minimal_size_for_split" value="[1.0;100.0;5;linear]"/>
           <parameter key="ID3.minimal_leaf_size" value="[1.0;100.0;5;linear]"/>
           <parameter key="ID3.minimal_gain" value="[0.0;100;5;linear]"/>
-          <parameter key="ID3.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
         </list>
         <parameter key="error_handling" value="fail on error"/>
         <parameter key="log_performance" value="true"/>
-        <parameter key="log_all_criteria" value="false"/>
+        <parameter key="log_all_criteria" value="true"/>
         <parameter key="synchronize" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
@@ -225,10 +225,12 @@
       <connect from_op="Sample" from_port="example set output" to_op="Append" to_port="example set 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="performance" to_port="result 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="model" to_port="result 2"/>
+      <connect from_op="Optimize Parameters (Grid)" from_port="parameter set" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
     </process>
   </operator>
 </process>
