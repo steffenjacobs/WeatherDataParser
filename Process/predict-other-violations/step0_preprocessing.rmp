@@ -72,6 +72,7 @@
           <parameter key="filters_entry_key" value="driver_gender.is_not_missing."/>
           <parameter key="filters_entry_key" value="driver_age.is_not_missing."/>
           <parameter key="filters_entry_key" value="driver_race.is_not_missing."/>
+          <parameter key="filters_entry_key" value="MEAN TEMP (Celsius).gt.-2"/>
         </list>
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
