@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="false" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="179" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/SubsetPoliceReport200K"/>
       </operator>
-      <operator activated="false" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date" width="90" x="246" y="34">
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date" width="90" x="380" y="34">
         <parameter key="attribute_name" value="stop_date"/>
         <parameter key="date_type" value="date"/>
         <parameter key="date_format" value="yyyy-MM-dd"/>
@@ -23,7 +23,7 @@
         <parameter key="locale" value="English (United States)"/>
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
-      <operator activated="false" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="45" y="187">
+      <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="179" y="187">
         <parameter key="csv_file" value="C:\Users\admin\Desktop\WeatherDataParser\weatherData_preprocessed.csv"/>
         <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
@@ -64,13 +64,13 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="false" class="generate_attributes" compatibility="8.1.001" expanded="true" height="82" name="Generate Attributes" width="90" x="179" y="187">
+      <operator activated="true" class="generate_attributes" compatibility="8.1.001" expanded="true" height="82" name="Generate Attributes" width="90" x="313" y="187">
         <list key="function_descriptions">
           <parameter key="COUNTY_UP" value="upper(COUNTY)"/>
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="false" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove bad dates" width="90" x="313" y="187">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove bad dates" width="90" x="447" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -80,7 +80,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="false" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date (2)" width="90" x="514" y="187">
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date (2)" width="90" x="581" y="187">
         <parameter key="attribute_name" value="DATE"/>
         <parameter key="date_type" value="date"/>
         <parameter key="date_format" value="MM/dd/yyyy"/>
@@ -88,7 +88,7 @@
         <parameter key="locale" value="English (United States)"/>
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
-      <operator activated="false" class="concurrency:join" compatibility="8.1.001" expanded="true" height="82" name="Join" width="90" x="380" y="34">
+      <operator activated="true" class="concurrency:join" compatibility="8.1.001" expanded="true" height="82" name="Join" width="90" x="514" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -98,22 +98,9 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="false" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples" width="90" x="514" y="34">
-        <parameter key="parameter_expression" value=""/>
-        <parameter key="condition_class" value="custom_filters"/>
-        <parameter key="invert_filter" value="true"/>
-        <list key="filters_list">
-          <parameter key="filters_entry_key" value="violation_raw.is_missing."/>
-        </list>
-        <parameter key="filters_logic_and" value="true"/>
-        <parameter key="filters_check_metadata" value="true"/>
-      </operator>
-      <operator activated="false" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="782" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/WeaterViolationJoin"/>
-      </operator>
-      <operator activated="true" class="read_csv" compatibility="8.1.001" expanded="true" height="68" name="Read CSV (2)" width="90" x="112" y="340">
+      <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV (3)" width="90" x="179" y="340">
         <parameter key="csv_file" value="C:\Users\admin\Desktop\WeatherDataParser\federalHolidays_FL.csv"/>
-        <parameter key="column_separators" value=";"/>
+        <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
         <parameter key="use_quotes" value="true"/>
         <parameter key="quotes_character" value="&quot;"/>
@@ -125,19 +112,51 @@
         <parameter key="grouped_digits" value="false"/>
         <parameter key="grouping_character" value=","/>
         <parameter key="date_format" value=""/>
-        <parameter key="first_row_as_names" value="true"/>
-        <list key="annotations"/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
         <parameter key="time_zone" value="SYSTEM"/>
         <parameter key="locale" value="English (United States)"/>
-        <parameter key="encoding" value="SYSTEM"/>
-        <parameter key="read_all_values_as_polynominal" value="true"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
         <list key="data_set_meta_data_information">
           <parameter key="0" value="Date.true.nominal.attribute"/>
-          <parameter key="1" value="Holiday.true.text.attribute"/>
+          <parameter key="1" value="Holiday.true.polynominal.attribute"/>
         </list>
         <parameter key="read_not_matching_values_as_missings" value="true"/>
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date (3)" width="90" x="380" y="340">
+        <parameter key="attribute_name" value="Date"/>
+        <parameter key="date_type" value="date"/>
+        <parameter key="date_format" value="MM/dd/yyyy"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="keep_old_attribute" value="false"/>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="8.1.001" expanded="true" height="82" name="Join (2)" width="90" x="648" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="outer"/>
+        <parameter key="use_id_attribute_as_key" value="false"/>
+        <list key="key_attributes">
+          <parameter key="stop_date" value="Date"/>
+        </list>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples" width="90" x="782" y="34">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="true"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="violation_raw.is_missing."/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="916" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/WeaterViolationJoin"/>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Nominal to Date" to_port="example set input"/>
       <connect from_op="Nominal to Date" from_port="example set output" to_op="Join" to_port="left"/>
@@ -145,9 +164,12 @@
       <connect from_op="Generate Attributes" from_port="example set output" to_op="Remove bad dates" to_port="example set input"/>
       <connect from_op="Remove bad dates" from_port="example set output" to_op="Nominal to Date (2)" to_port="example set input"/>
       <connect from_op="Nominal to Date (2)" from_port="example set output" to_op="Join" to_port="right"/>
-      <connect from_op="Join" from_port="join" to_op="Filter Examples" to_port="example set input"/>
+      <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
+      <connect from_op="Read CSV (3)" from_port="output" to_op="Nominal to Date (3)" to_port="example set input"/>
+      <connect from_op="Nominal to Date (3)" from_port="example set output" to_op="Join (2)" to_port="right"/>
+      <connect from_op="Join (2)" from_port="join" to_op="Filter Examples" to_port="example set input"/>
       <connect from_op="Filter Examples" from_port="example set output" to_op="Store" to_port="input"/>
-      <connect from_op="Read CSV (2)" from_port="output" to_port="result 1"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
