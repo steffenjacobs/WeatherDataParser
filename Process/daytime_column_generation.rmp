@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="8.1.003">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="8.1.003" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.1.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,16 +12,16 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/WeaterViolationJoin"/>
       </operator>
-      <operator activated="true" class="generate_attributes" compatibility="8.1.003" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="34">
+      <operator activated="true" class="generate_attributes" compatibility="8.1.001" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="34">
         <list key="function_descriptions">
           <parameter key="stop_time_to_integer" value="if(parse(replace(stop_time, &quot;:&quot;, &quot;&quot;))&gt;2200, 1, parse(replace(stop_time, &quot;:&quot;, &quot;&quot;)))"/>
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="false" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Filter Examples" width="90" x="514" y="442">
+      <operator activated="false" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples" width="90" x="514" y="442">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -29,14 +29,14 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="313" y="442">
+      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="313" y="442">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="1000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="false" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Filter Examples (2)" width="90" x="514" y="289">
+      <operator activated="false" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples (2)" width="90" x="514" y="289">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -46,7 +46,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="false" class="sample" compatibility="8.1.003" expanded="true" height="82" name="Sample" width="90" x="514" y="340">
+      <operator activated="false" class="sample" compatibility="8.1.001" expanded="true" height="82" name="Sample" width="90" x="514" y="340">
         <parameter key="sample" value="absolute"/>
         <parameter key="balance_data" value="false"/>
         <parameter key="sample_size" value="26000"/>
@@ -58,12 +58,12 @@
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="false" class="append" compatibility="8.1.003" expanded="true" height="103" name="Append" width="90" x="648" y="340">
+      <operator activated="false" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="648" y="340">
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
         <parameter key="merge_type" value="all"/>
       </operator>
-      <operator activated="false" class="aggregate" compatibility="8.1.003" expanded="true" height="82" name="Aggregate" width="90" x="648" y="442">
+      <operator activated="false" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate" width="90" x="648" y="442">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -86,11 +86,11 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="discretize_by_user_specification" compatibility="8.1.003" expanded="true" height="103" name="Discretize" width="90" x="380" y="34">
+      <operator activated="true" class="discretize_by_user_specification" compatibility="8.1.001" expanded="true" height="103" name="Discretize" width="90" x="380" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
-        <parameter key="attribute" value="stop_time_parsed"/>
+        <parameter key="attribute" value="stop_time_to_integer"/>
         <parameter key="attributes" value=""/>
         <parameter key="use_except_expression" value="false"/>
         <parameter key="value_type" value="numeric"/>
