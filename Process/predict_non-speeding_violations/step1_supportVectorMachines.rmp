@@ -159,6 +159,7 @@
           <portSpacing port="source_training set" spacing="0"/>
           <portSpacing port="sink_model" spacing="0"/>
           <portSpacing port="sink_through 1" spacing="0"/>
+          <description align="left" color="yellow" colored="false" height="120" resized="false" width="180" x="150" y="170">If nu is set too high, algorithm may become infeasible (cf. https://stackoverflow.com/&lt;br/&gt;questions/26987248/&lt;br/&gt;nu-is-infeasible)</description>
         </process>
         <process expanded="true">
           <operator activated="true" class="apply_model" compatibility="8.1.001" expanded="true" height="82" name="Apply Model (nu-SVC)" width="90" x="45" y="34">
