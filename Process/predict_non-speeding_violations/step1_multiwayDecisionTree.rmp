@@ -34,7 +34,7 @@
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
         <parameter key="attribute" value="driver_age"/>
-        <parameter key="attributes" value=""/>
+        <parameter key="attributes" value="|driver_age|MEAN TEMP (Celsius)"/>
         <parameter key="use_except_expression" value="false"/>
         <parameter key="value_type" value="numeric"/>
         <parameter key="use_value_type_exception" value="false"/>
@@ -52,7 +52,7 @@
       </operator>
       <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.001" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="447" y="34">
         <list key="parameters">
-          <parameter key="Decision Tree.criterion" value="gain_ratio,information_gain,gini_index,accuracy,least_square"/>
+          <parameter key="Decision Tree.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
           <parameter key="Decision Tree.maximal_depth" value="[-1.0;100.0;10;linear]"/>
           <parameter key="Decision Tree.apply_pruning" value="true,false"/>
         </list>
@@ -182,6 +182,7 @@
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <portSpacing port="sink_result 5" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="87" y="158">In case the data set is too big, add the op 'Sample (Stratified)' before 'Select Attributes'.</description>
     </process>
   </operator>
 </process>
