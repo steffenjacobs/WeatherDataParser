@@ -31,9 +31,9 @@
       </operator>
       <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.001" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="313" y="34">
         <list key="parameters">
-          <parameter key="Decision Tree (4).criterion" value="gain_ratio,information_gain,gini_index,accuracy,least_square"/>
-          <parameter key="Decision Tree (4).maximal_depth" value="[1.0;100.0;10;linear]"/>
-          <parameter key="Decision Tree (4).apply_pruning" value="true,false"/>
+          <parameter key="Decision Tree.criterion" value="gain_ratio,information_gain,gini_index,accuracy,least_square"/>
+          <parameter key="Decision Tree.maximal_depth" value="[1.0;100.0;10;linear]"/>
+          <parameter key="Decision Tree.apply_pruning" value="true,false"/>
         </list>
         <parameter key="error_handling" value="fail on error"/>
         <parameter key="log_performance" value="true"/>
@@ -50,9 +50,9 @@
             <parameter key="local_random_seed" value="1992"/>
             <parameter key="enable_parallel_execution" value="true"/>
             <process expanded="true">
-              <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules (3)" width="90" x="179" y="34">
+              <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
                 <process expanded="true">
-                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="8.1.001" expanded="true" height="103" name="Decision Tree (4)" width="90" x="447" y="34">
+                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="8.1.001" expanded="true" height="103" name="Decision Tree" width="90" x="447" y="34">
                     <parameter key="criterion" value="gain_ratio"/>
                     <parameter key="maximal_depth" value="20"/>
                     <parameter key="apply_pruning" value="true"/>
@@ -63,14 +63,14 @@
                     <parameter key="minimal_size_for_split" value="4"/>
                     <parameter key="number_of_prepruning_alternatives" value="3"/>
                   </operator>
-                  <connect from_port="training set" to_op="Decision Tree (4)" to_port="training set"/>
-                  <connect from_op="Decision Tree (4)" from_port="model" to_port="model"/>
+                  <connect from_port="training set" to_op="Decision Tree" to_port="training set"/>
+                  <connect from_op="Decision Tree" from_port="model" to_port="model"/>
                   <portSpacing port="source_training set" spacing="0"/>
                   <portSpacing port="sink_model" spacing="0"/>
                 </process>
               </operator>
-              <connect from_port="training set" to_op="Tree to Rules (3)" to_port="training set"/>
-              <connect from_op="Tree to Rules (3)" from_port="model" to_port="model"/>
+              <connect from_port="training set" to_op="Tree to Rules" to_port="training set"/>
+              <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
               <portSpacing port="source_training set" spacing="0"/>
               <portSpacing port="sink_model" spacing="0"/>
               <portSpacing port="sink_through 1" spacing="0"/>
@@ -125,10 +125,9 @@
           <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="715" y="187">
             <parameter key="filename" value="C:\Users\admin\Desktop\WeatherDataParser\Process\predict_non-speeding_violations\log_decision-tree.log"/>
             <list key="log">
-              <parameter key="Criterion" value="operator.ID3.parameter.criterion"/>
-              <parameter key="MinimalSizeForSplit" value="operator.ID3.parameter.minimal_size_for_split"/>
-              <parameter key="MinimalLeafSize" value="operator.ID3.parameter.minimal_leaf_size"/>
-              <parameter key="MinimalGain" value="operator.ID3.parameter.minimal_gain"/>
+              <parameter key="Criterion" value="operator.Decision Tree.parameter.criterion"/>
+              <parameter key="Apply Pruning" value="operator.Decision Tree.parameter.apply_pruning"/>
+              <parameter key="Maximal Depth" value="operator.Decision Tree.parameter.maximal_depth"/>
               <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
               <parameter key="StdDeviation" value="operator.Cross Validation.value.std deviation 1"/>
             </list>
