@@ -148,6 +148,7 @@
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <portSpacing port="sink_result 5" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="71" y="161">In case the data set is too big, add the op 'Sample (Stratified)' before 'Select Attributes'.</description>
     </process>
   </operator>
 </process>
