@@ -45,7 +45,7 @@
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
             <parameter key="sampling_type" value="stratified sampling"/>
-            <parameter key="use_local_random_seed" value="true"/>
+            <parameter key="use_local_random_seed" value="false"/>
             <parameter key="local_random_seed" value="1992"/>
             <parameter key="enable_parallel_execution" value="true"/>
             <process expanded="true">
