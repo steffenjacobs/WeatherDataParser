@@ -88,7 +88,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="true"/>
         <list key="value_mappings">
-          <parameter key="SPEED" value="SPEED"/>
+          <parameter key="Speeding" value="SPEED"/>
         </list>
         <parameter key="consider_regular_expressions" value="false"/>
         <parameter key="add_default_mapping" value="true"/>
