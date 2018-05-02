@@ -123,7 +123,7 @@
             </process>
           </operator>
           <operator activated="true" class="log" compatibility="8.1.003" expanded="true" height="82" name="Log" width="90" x="380" y="136">
-            <parameter key="filename" value="D:\Master (2017-)\2. Semester\DM I\Project\predict_speeding_violation\decision_tree_log.log"/>
+            <parameter key="filename" value="C:\Users\Arnold\Desktop\log\log_decision_tree.log"/>
             <list key="log">
               <parameter key="Criterion" value="operator.Decision Tree.parameter.criterion"/>
               <parameter key="Apply Pruning" value="operator.Decision Tree.parameter.apply_pruning"/>
