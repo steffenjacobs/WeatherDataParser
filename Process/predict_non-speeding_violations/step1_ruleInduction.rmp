@@ -113,12 +113,11 @@
           <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="715" y="136">
             <parameter key="filename" value="C:\Users\admin\Desktop\WeatherDataParser\Process\predict_non-speeding_violations\log_rule-induction.log"/>
             <list key="log">
-              <parameter key="Criterion" value="operator.ID3.parameter.criterion"/>
-              <parameter key="MinimalSizeForSplit" value="operator.ID3.parameter.minimal_size_for_split"/>
-              <parameter key="MinimalLeafSize" value="operator.ID3.parameter.minimal_leaf_size"/>
-              <parameter key="MinimalGain" value="operator.ID3.parameter.minimal_gain"/>
+              <parameter key="Criterion" value="operator.Rule Induction.parameter.criterion"/>
               <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
               <parameter key="StdDeviation" value="operator.Cross Validation.value.std deviation 1"/>
+              <parameter key="Accuracy" value="operator.Performance.value.accuracy"/>
+              <parameter key="Classification Error" value="operator.Performance.value.classification_error"/>
             </list>
             <parameter key="sorting_type" value="none"/>
             <parameter key="sorting_k" value="100"/>
