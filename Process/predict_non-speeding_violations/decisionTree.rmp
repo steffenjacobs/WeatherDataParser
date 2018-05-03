@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/PredictOtherViolations_Dataset"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="8.1.001" expanded="true" height="82" name="Select Attributes" width="90" x="179" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -160,7 +160,7 @@
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <portSpacing port="sink_result 5" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="78" y="168">In case the data set is too big, add the op 'Sample (Stratified)' before 'Select Attributes'.</description>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="101" y="214">In case the data set is too big, add the op 'Sample (Stratified)' before 'Select Attributes'.</description>
     </process>
   </operator>
 </process>
