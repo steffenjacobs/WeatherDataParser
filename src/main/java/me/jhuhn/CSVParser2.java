@@ -119,10 +119,10 @@ public class CSVParser2 {
            
            k++;
            
-           if(k > 100000) {
-        	   writer.close();
-        	   return;
-           }
+//           if(k > 100000) {
+//        	   writer.close();
+//        	   return;
+//           }
         }
 	}
 }
