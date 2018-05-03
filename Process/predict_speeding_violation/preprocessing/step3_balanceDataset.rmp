@@ -15,7 +15,11 @@
       <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Unbalanced"/>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_port="result 1"/>
+      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Balanced"/>
+      </operator>
+      <connect from_op="Retrieve" from_port="output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
