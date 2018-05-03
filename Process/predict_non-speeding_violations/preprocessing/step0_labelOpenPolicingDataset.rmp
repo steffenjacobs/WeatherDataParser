@@ -114,15 +114,15 @@
           <parameter key="id" value="id"/>
         </list>
       </operator>
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PolicingDatasetLabeled"/>
+      </operator>
       <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="581" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
-      </operator>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PolicingDatasetLabeled"/>
       </operator>
       <connect from_op="Read CSV" from_port="output" to_op="Remove missing violations" to_port="example set input"/>
       <connect from_op="Remove missing violations" from_port="example set output" to_op="Remove speeding violations" to_port="example set input"/>
