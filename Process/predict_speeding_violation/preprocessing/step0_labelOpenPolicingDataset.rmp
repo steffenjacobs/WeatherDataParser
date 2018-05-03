@@ -73,10 +73,10 @@
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
         <list key="filters_list">
-          <parameter key="filters_entry_key" value="violation.is_missing."/>
+          <parameter key="filters_entry_key" value="stop_time.is_missing."/>
         </list>
         <parameter key="filters_logic_and" value="true"/>
-        <parameter key="filters_check_metadata" value="true"/>
+        <parameter key="filters_check_metadata" value="false"/>
       </operator>
       <operator activated="true" class="map" compatibility="8.1.003" expanded="true" height="82" name="Map" width="90" x="45" y="289">
         <parameter key="attribute_filter_type" value="single"/>
@@ -112,7 +112,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.003" expanded="true" height="103" name="Nominal to Binominal" width="90" x="246" y="136">
+      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.003" expanded="true" height="103" name="Nominal to Binominal" width="90" x="380" y="187">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
@@ -130,7 +130,7 @@
         <parameter key="transform_binominal" value="false"/>
         <parameter key="use_underscore_in_name" value="false"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="8.1.003" expanded="true" height="82" name="Set Role" width="90" x="447" y="34">
+      <operator activated="true" class="set_role" compatibility="8.1.003" expanded="true" height="82" name="Set Role" width="90" x="514" y="34">
         <parameter key="attribute_name" value="violation"/>
         <parameter key="target_role" value="label"/>
         <list key="set_additional_roles">
@@ -140,7 +140,7 @@
       <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="715" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PolicingDatasetLabeled"/>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="581" y="85">
+      <operator activated="false" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="648" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
@@ -157,7 +157,7 @@
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="406" y="194">Set role potential problem:&lt;br/&gt;Process works as expected, potential RM bug</description>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="535" y="263">Set role potential problem:&lt;br/&gt;Process works as expected, potential RM bug</description>
     </process>
   </operator>
 </process>

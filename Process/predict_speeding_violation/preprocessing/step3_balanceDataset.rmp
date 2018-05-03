@@ -50,7 +50,7 @@
       </operator>
       <operator activated="true" class="filter_example_range" compatibility="8.1.003" expanded="true" height="82" name="Filter out rows" width="90" x="380" y="391">
         <parameter key="first_example" value="1"/>
-        <parameter key="last_example" value="34554"/>
+        <parameter key="last_example" value="34552"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
       <operator activated="true" class="append" compatibility="8.1.003" expanded="true" height="103" name="Append" width="90" x="380" y="136">

@@ -22,9 +22,11 @@
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Weight by Information Gain" to_port="example set"/>
       <connect from_op="Weight by Information Gain" from_port="weights" to_port="result 1"/>
+      <connect from_op="Weight by Information Gain" from_port="example set" to_port="result 2"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
     </process>
   </operator>
 </process>
