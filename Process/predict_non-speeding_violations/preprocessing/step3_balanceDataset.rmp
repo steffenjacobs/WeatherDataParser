@@ -15,11 +15,7 @@
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Unbalanced"/>
       </operator>
-      <operator activated="false" class="maratool:Sample (Balance)" compatibility="1.4.001" expanded="true" height="82" name="Sample (Balance)" width="90" x="179" y="85">
-        <parameter key="number_of_examples_per_class" value="5000"/>
-        <parameter key="allow_downsampling" value="true"/>
-      </operator>
-      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="313" y="34"/>
+      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="246" y="34"/>
       <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="447" y="136">
         <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced"/>
       </operator>
