@@ -54,7 +54,7 @@
         <list key="parameters">
           <parameter key="CHAID.minimal_size_for_split" value="[1.0;100.0;10;linear]"/>
           <parameter key="CHAID.minimal_leaf_size" value="[1.0;100.0;10;linear]"/>
-          <parameter key="CHAID.minimal_gain" value="[0.0;Infinity;10;linear]"/>
+          <parameter key="CHAID.minimal_gain" value="[0.0;100;10;linear]"/>
           <parameter key="CHAID.maximal_depth" value="[-1.0;100.0;10;linear]"/>
           <parameter key="CHAID.confidence" value="[1.0E-7;0.5;10;linear]"/>
         </list>
@@ -64,7 +64,7 @@
         <parameter key="synchronize" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="581" y="34">
+          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="112" y="34">
             <parameter key="split_on_batch_attribute" value="false"/>
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
@@ -144,7 +144,7 @@
               <portSpacing port="sink_performance 2" spacing="0"/>
             </process>
           </operator>
-          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="715" y="187">
+          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="313" y="187">
             <parameter key="filename" value="C:\Users\admin\Desktop\WeatherDataParser\Process\predict_non-speeding_violations\log_chaid.log"/>
             <list key="log">
               <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
@@ -153,7 +153,7 @@
               <parameter key="Minimal leaf size" value="operator.CHAID.parameter.minimal_leaf_size"/>
               <parameter key="Minimal gain" value="operator.CHAID.parameter.minimal_gain"/>
               <parameter key="Maximal depth" value="operator.CHAID.parameter.maximal_depth"/>
-              <parameter key="Maximal depth" value="operator.CHAID.parameter.confidence"/>
+              <parameter key="Confidence" value="operator.CHAID.parameter.confidence"/>
             </list>
             <parameter key="sorting_type" value="none"/>
             <parameter key="sorting_k" value="100"/>

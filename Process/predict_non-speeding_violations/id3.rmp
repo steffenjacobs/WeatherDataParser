@@ -55,7 +55,7 @@
           <parameter key="ID3.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
           <parameter key="ID3.minimal_size_for_split" value="[1.0;100.0;10;linear]"/>
           <parameter key="ID3.minimal_leaf_size" value="[1.0;100.0;10;linear]"/>
-          <parameter key="ID3.minimal_gain" value="[0.0;Infinity;10;linear]"/>
+          <parameter key="ID3.minimal_gain" value="[0.0;100;10;linear]"/>
         </list>
         <parameter key="error_handling" value="fail on error"/>
         <parameter key="log_performance" value="true"/>
@@ -63,7 +63,7 @@
         <parameter key="synchronize" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="447" y="34">
+          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="112" y="34">
             <parameter key="split_on_batch_attribute" value="false"/>
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
@@ -74,7 +74,7 @@
             <process expanded="true">
               <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
                 <process expanded="true">
-                  <operator activated="true" class="id3" compatibility="8.1.001" expanded="true" height="82" name="ID3" width="90" x="447" y="34">
+                  <operator activated="true" class="id3" compatibility="8.1.001" expanded="true" height="82" name="ID3" width="90" x="246" y="34">
                     <parameter key="criterion" value="gini_index"/>
                     <parameter key="minimal_size_for_split" value="4"/>
                     <parameter key="minimal_leaf_size" value="2"/>
@@ -139,7 +139,7 @@
               <portSpacing port="sink_performance 2" spacing="0"/>
             </process>
           </operator>
-          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="715" y="187">
+          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="313" y="136">
             <parameter key="filename" value="C:\Users\admin\Desktop\WeatherDataParser\Process\predict_non-speeding_violations\log_id3.log"/>
             <list key="log">
               <parameter key="Criterion" value="operator.ID3.parameter.criterion"/>

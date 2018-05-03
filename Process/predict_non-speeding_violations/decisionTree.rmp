@@ -41,7 +41,7 @@
         <parameter key="synchronize" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="447" y="34">
+          <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="112" y="34">
             <parameter key="split_on_batch_attribute" value="false"/>
             <parameter key="leave_one_out" value="false"/>
             <parameter key="number_of_folds" value="10"/>
@@ -52,7 +52,7 @@
             <process expanded="true">
               <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
                 <process expanded="true">
-                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="8.1.001" expanded="true" height="103" name="Decision Tree" width="90" x="447" y="34">
+                  <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="8.1.001" expanded="true" height="103" name="Decision Tree" width="90" x="313" y="34">
                     <parameter key="criterion" value="gain_ratio"/>
                     <parameter key="maximal_depth" value="20"/>
                     <parameter key="apply_pruning" value="true"/>
@@ -122,7 +122,7 @@
               <portSpacing port="sink_performance 2" spacing="0"/>
             </process>
           </operator>
-          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="715" y="187">
+          <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="380" y="136">
             <parameter key="filename" value="C:\Users\admin\Desktop\WeatherDataParser\Process\predict_non-speeding_violations\log_decision-tree.log"/>
             <list key="log">
               <parameter key="Criterion" value="operator.Decision Tree.parameter.criterion"/>

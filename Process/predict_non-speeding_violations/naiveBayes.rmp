@@ -38,7 +38,7 @@
         <parameter key="local_random_seed" value="1992"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="naive_bayes" compatibility="8.1.001" expanded="true" height="82" name="Naive Bayes" width="90" x="179" y="34">
+          <operator activated="true" class="naive_bayes" compatibility="8.1.001" expanded="true" height="82" name="Naive Bayes" width="90" x="112" y="34">
             <parameter key="laplace_correction" value="true"/>
           </operator>
           <connect from_port="training set" to_op="Naive Bayes" to_port="training set"/>

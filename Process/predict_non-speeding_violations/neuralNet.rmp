@@ -29,7 +29,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="nominal_to_numerical" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Numerical" width="90" x="380" y="34">
+      <operator activated="true" class="nominal_to_numerical" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Numerical" width="90" x="313" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
@@ -50,7 +50,7 @@
         <parameter key="unexpected_value_handling" value="all 0 and warning"/>
         <parameter key="use_underscore_in_name" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="648" y="34">
+      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="447" y="34">
         <parameter key="split_on_batch_attribute" value="false"/>
         <parameter key="leave_one_out" value="false"/>
         <parameter key="number_of_folds" value="10"/>
@@ -59,7 +59,7 @@
         <parameter key="local_random_seed" value="1992"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="neural_net" compatibility="8.1.001" expanded="true" height="82" name="Neural Net" width="90" x="179" y="34">
+          <operator activated="true" class="neural_net" compatibility="8.1.001" expanded="true" height="82" name="Neural Net" width="90" x="112" y="34">
             <list key="hidden_layers"/>
             <parameter key="training_cycles" value="1000"/>
             <parameter key="learning_rate" value="0.3"/>
