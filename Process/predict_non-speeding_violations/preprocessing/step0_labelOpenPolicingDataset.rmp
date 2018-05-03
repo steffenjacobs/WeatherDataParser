@@ -73,7 +73,7 @@
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
         <list key="filters_list">
-          <parameter key="filters_entry_key" value="violation.is_missing."/>
+          <parameter key="filters_entry_key" value="violation.equals.NONE"/>
         </list>
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
