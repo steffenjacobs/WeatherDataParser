@@ -53,10 +53,10 @@
             <parameter key="create_view" value="false"/>
           </operator>
           <operator activated="true" class="multiply" compatibility="8.1.003" expanded="true" height="103" name="Multiply" width="90" x="179" y="34"/>
-          <operator activated="true" class="performance_binominal_classification" compatibility="8.1.003" expanded="true" height="82" name="Performance" width="90" x="313" y="289">
+          <operator activated="true" class="performance_binominal_classification" compatibility="8.1.003" expanded="true" height="82" name="Performance (Binary)" width="90" x="313" y="187">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
-            <parameter key="classification_error" value="false"/>
+            <parameter key="classification_error" value="true"/>
             <parameter key="kappa" value="false"/>
             <parameter key="AUC (optimistic)" value="false"/>
             <parameter key="AUC" value="false"/>
@@ -83,8 +83,8 @@
           <connect from_port="test set" to_op="Apply Model" to_port="unlabelled data"/>
           <connect from_op="Apply Model" from_port="labelled data" to_op="Multiply" to_port="input"/>
           <connect from_op="Multiply" from_port="output 1" to_port="test set results"/>
-          <connect from_op="Multiply" from_port="output 2" to_op="Performance" to_port="labelled data"/>
-          <connect from_op="Performance" from_port="performance" to_port="performance 1"/>
+          <connect from_op="Multiply" from_port="output 2" to_op="Performance (Binary)" to_port="labelled data"/>
+          <connect from_op="Performance (Binary)" from_port="performance" to_port="performance 1"/>
           <portSpacing port="source_model" spacing="0"/>
           <portSpacing port="source_test set" spacing="0"/>
           <portSpacing port="source_through 1" spacing="0"/>
