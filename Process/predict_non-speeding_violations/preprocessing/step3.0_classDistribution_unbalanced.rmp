@@ -15,10 +15,7 @@
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Unbalanced"/>
       </operator>
-      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="246" y="34"/>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="447" y="136">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced"/>
-      </operator>
+      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="82" name="Multiply" width="90" x="246" y="34"/>
       <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate" width="90" x="447" y="34">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
@@ -44,7 +41,6 @@
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Multiply" to_port="input"/>
       <connect from_op="Multiply" from_port="output 1" to_op="Aggregate" to_port="example set input"/>
-      <connect from_op="Multiply" from_port="output 2" to_op="Store" to_port="input"/>
       <connect from_op="Aggregate" from_port="example set output" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
