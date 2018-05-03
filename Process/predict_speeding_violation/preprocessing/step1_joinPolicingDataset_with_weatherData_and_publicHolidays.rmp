@@ -24,7 +24,7 @@
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
       <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="112" y="187">
-        <parameter key="csv_file" value="C:\Users\Arnold\Downloads\weatherData_preprocessed.csv"/>
+        <parameter key="csv_file" value="D:\Master (2017-)\2. Semester\DM I\Project\stanford-open-policing-project-florida\weatherData_preprocessed.csv"/>
         <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
         <parameter key="use_quotes" value="true"/>
