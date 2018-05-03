@@ -157,6 +157,7 @@
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="406" y="194">Set role potential problem:&lt;br/&gt;Process works as expected, potential RM bug</description>
     </process>
   </operator>
 </process>
