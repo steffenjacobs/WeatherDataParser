@@ -68,7 +68,7 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove missing violations" width="90" x="179" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove missing violations" width="90" x="112" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
@@ -78,7 +78,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove speeding violations" width="90" x="313" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove speeding violations" width="90" x="246" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
@@ -87,6 +87,25 @@
         </list>
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="map" compatibility="8.1.001" expanded="true" height="82" name="Map" width="90" x="380" y="187">
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="violation"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <list key="value_mappings">
+          <parameter key="Other (non-mapped)" value="Other"/>
+        </list>
+        <parameter key="consider_regular_expressions" value="false"/>
+        <parameter key="add_default_mapping" value="false"/>
       </operator>
       <operator activated="true" class="set_role" compatibility="8.1.001" expanded="true" height="82" name="Set Role" width="90" x="447" y="34">
         <parameter key="attribute_name" value="violation"/>
@@ -107,7 +126,8 @@
       </operator>
       <connect from_op="Read CSV" from_port="output" to_op="Remove missing violations" to_port="example set input"/>
       <connect from_op="Remove missing violations" from_port="example set output" to_op="Remove speeding violations" to_port="example set input"/>
-      <connect from_op="Remove speeding violations" from_port="example set output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Remove speeding violations" from_port="example set output" to_op="Map" to_port="example set input"/>
+      <connect from_op="Map" from_port="example set output" to_op="Set Role" to_port="example set input"/>
       <connect from_op="Set Role" from_port="example set output" to_op="Sample (Stratified)" to_port="example set input"/>
       <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
