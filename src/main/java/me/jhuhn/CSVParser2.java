@@ -45,15 +45,42 @@ public class CSVParser2 {
         	//-------------------   
         	   
         	   String[] test = oneLine.split(",\"");        	   
-        	   String last = test[test.length -1];
+        	   //String last = test[test.length -1];
+        	   
+        	   String last="";
+        	   try {
+        	    last = test[2];
+        	   
+        	   }catch(Exception e) {
+        		   last = test[1];
+
+        	   }
+        	   
+        	   //System.out.println(test.length);
         	   String violationCSV = last.split("\",")[0];
         	   //System.err.println(violationCSV);
         	   String[] violations = violationCSV.split(",");
         	  // System.err.println(violations[0] + " - " + violations[1]);
         	   
+//        	   System.out.println("-------------------------------------------------------------------------------------");
+//        	   for (int j = 0; j < test.length; j++) {
+//				   System.err.println(test[j]);
+//			   }
+//        	   System.out.println("-------------------------------------------------------------------------------------");
+        	   
 
         	   for (int i = 0; i < violations.length; i++) {
         		   parts[15] = violations[i];
+        		   
+//        		   if(parts[15].contains("FALSE") || parts[15].contains(" F.S.)")) {
+//        			   //System.err.println(parts[0] + " - " + parts[15]);
+//        			   System.err.println(oneLine);
+//        			   for (int j = 0; j < test.length; j++) {
+//        				   System.err.println(test[j]);
+//        			   }
+//        			   System.err.println("--------------------------------------------------------------------------");
+//        		   }
+        		   
 //        		   try {
 //        			   parts[14] = rawViolationValues[i];
 //        		   }catch(Exception e) {
@@ -92,10 +119,10 @@ public class CSVParser2 {
            
            k++;
            
-//           if(k > 100000) {
-//        	   writer.close();
-//        	   return;
-//           }
+           if(k > 100000) {
+        	   writer.close();
+        	   return;
+           }
         }
 	}
 }
