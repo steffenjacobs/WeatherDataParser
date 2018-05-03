@@ -13,36 +13,66 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Unbalanced"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_7"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter DUI violations" width="90" x="179" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter truck violations" width="90" x="179" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
         <list key="filters_list">
-          <parameter key="filters_entry_key" value="violation.equals.SPEED"/>
+          <parameter key="filters_entry_key" value="violation.equals.Truck"/>
         </list>
         <parameter key="filters_logic_and" value="true"/>
-        <parameter key="filters_check_metadata" value="true"/>
+        <parameter key="filters_check_metadata" value="false"/>
       </operator>
-      <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter out rows" width="90" x="313" y="187">
+      <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter out rows" width="90" x="380" y="34">
         <parameter key="first_example" value="1"/>
-        <parameter key="last_example" value="27642"/>
-        <parameter key="invert_filter" value="false"/>
+        <parameter key="last_example" value="5838"/>
+        <parameter key="invert_filter" value="true"/>
       </operator>
-      <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="380" y="34">
+      <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="380" y="136">
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
         <parameter key="merge_type" value="all"/>
       </operator>
-      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="68" name="Multiply (2)" width="90" x="581" y="289"/>
-      <connect from_op="Retrieve" from_port="output" to_op="Filter DUI violations" to_port="example set input"/>
-      <connect from_op="Filter DUI violations" from_port="example set output" to_op="Filter out rows" to_port="example set input"/>
-      <connect from_op="Filter DUI violations" from_port="original" to_op="Append" to_port="example set 1"/>
+      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply (2)" width="90" x="514" y="136"/>
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate" width="90" x="648" y="136">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="id" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="violation|"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="648" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_8"/>
+      </operator>
+      <connect from_op="Retrieve" from_port="output" to_op="Filter truck violations" to_port="example set input"/>
+      <connect from_op="Filter truck violations" from_port="example set output" to_op="Filter out rows" to_port="example set input"/>
+      <connect from_op="Filter truck violations" from_port="original" to_op="Append" to_port="example set 1"/>
       <connect from_op="Filter out rows" from_port="example set output" to_op="Append" to_port="example set 2"/>
       <connect from_op="Append" from_port="merged set" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_op="Store" to_port="input"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="Aggregate" to_port="example set input"/>
+      <connect from_op="Aggregate" from_port="example set output" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
     </process>
   </operator>
 </process>
