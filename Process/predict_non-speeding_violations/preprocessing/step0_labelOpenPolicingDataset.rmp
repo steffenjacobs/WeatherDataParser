@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
-        <parameter key="csv_file" value="C:\Users\admin\Desktop\WeatherDataParser\data_set_modified_by_jo.csv"/>
+        <parameter key="csv_file" value="C:\Users\admin\Desktop\WeatherDataParser\data_set_modified_violations.csv"/>
         <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
         <parameter key="use_quotes" value="true"/>
@@ -114,7 +114,7 @@
           <parameter key="id" value="id"/>
         </list>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="581" y="34">
+      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="581" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
@@ -128,8 +128,7 @@
       <connect from_op="Remove missing violations" from_port="example set output" to_op="Remove speeding violations" to_port="example set input"/>
       <connect from_op="Remove speeding violations" from_port="example set output" to_op="Map" to_port="example set input"/>
       <connect from_op="Map" from_port="example set output" to_op="Set Role" to_port="example set input"/>
-      <connect from_op="Set Role" from_port="example set output" to_op="Sample (Stratified)" to_port="example set input"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
     </process>
