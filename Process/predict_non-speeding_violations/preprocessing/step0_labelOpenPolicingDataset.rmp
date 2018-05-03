@@ -68,27 +68,18 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter speeding violations" width="90" x="179" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter" width="90" x="179" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
         <list key="filters_list">
           <parameter key="filters_entry_key" value="violation.equals.Speeding"/>
-        </list>
-        <parameter key="filters_logic_and" value="true"/>
-        <parameter key="filters_check_metadata" value="true"/>
-      </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter missing stop time" width="90" x="313" y="34">
-        <parameter key="parameter_expression" value=""/>
-        <parameter key="condition_class" value="custom_filters"/>
-        <parameter key="invert_filter" value="true"/>
-        <list key="filters_list">
           <parameter key="filters_entry_key" value="stop_time.is_missing."/>
         </list>
-        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_logic_and" value="false"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="map" compatibility="8.1.001" expanded="true" height="82" name="Map" width="90" x="447" y="34">
+      <operator activated="true" class="map" compatibility="8.1.001" expanded="true" height="82" name="Map" width="90" x="313" y="34">
         <parameter key="attribute_filter_type" value="single"/>
         <parameter key="attribute" value="violation"/>
         <parameter key="attributes" value=""/>
@@ -107,26 +98,25 @@
         <parameter key="consider_regular_expressions" value="false"/>
         <parameter key="add_default_mapping" value="false"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="8.1.001" expanded="true" height="82" name="Set Role" width="90" x="581" y="34">
+      <operator activated="true" class="set_role" compatibility="8.1.001" expanded="true" height="82" name="Set Role" width="90" x="447" y="34">
         <parameter key="attribute_name" value="violation"/>
         <parameter key="target_role" value="label"/>
         <list key="set_additional_roles">
           <parameter key="id" value="id"/>
         </list>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="849" y="34">
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PolicingDatasetLabeled"/>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="715" y="187">
+      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="581" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <connect from_op="Read CSV" from_port="output" to_op="Filter speeding violations" to_port="example set input"/>
-      <connect from_op="Filter speeding violations" from_port="example set output" to_op="Filter missing stop time" to_port="example set input"/>
-      <connect from_op="Filter missing stop time" from_port="example set output" to_op="Map" to_port="example set input"/>
+      <connect from_op="Read CSV" from_port="output" to_op="Filter" to_port="example set input"/>
+      <connect from_op="Filter" from_port="example set output" to_op="Map" to_port="example set input"/>
       <connect from_op="Map" from_port="example set output" to_op="Set Role" to_port="example set input"/>
       <connect from_op="Set Role" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
