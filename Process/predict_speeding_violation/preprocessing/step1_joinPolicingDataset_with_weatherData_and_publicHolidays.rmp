@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="8.1.001">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.003">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="8.1.001" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.1.003" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PolicingDatasetLabeled"/>
       </operator>
-      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date" width="90" x="380" y="34">
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.003" expanded="true" height="82" name="Nominal to Date" width="90" x="380" y="34">
         <parameter key="attribute_name" value="stop_date"/>
         <parameter key="date_type" value="date"/>
         <parameter key="date_format" value="yyyy-MM-dd"/>
@@ -64,13 +64,13 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="generate_attributes" compatibility="8.1.001" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="187">
+      <operator activated="true" class="generate_attributes" compatibility="8.1.003" expanded="true" height="82" name="Generate Attributes" width="90" x="246" y="187">
         <list key="function_descriptions">
           <parameter key="COUNTY_UP" value="upper(COUNTY)"/>
         </list>
         <parameter key="keep_all" value="true"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove bad dates" width="90" x="380" y="187">
+      <operator activated="true" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Remove bad dates" width="90" x="380" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -80,7 +80,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date (2)" width="90" x="514" y="187">
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.003" expanded="true" height="82" name="Nominal to Date (2)" width="90" x="514" y="187">
         <parameter key="attribute_name" value="DATE"/>
         <parameter key="date_type" value="date"/>
         <parameter key="date_format" value="MM/dd/yyyy"/>
@@ -88,7 +88,7 @@
         <parameter key="locale" value="English (United States)"/>
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:join" compatibility="8.1.001" expanded="true" height="82" name="Join" width="90" x="514" y="34">
+      <operator activated="true" class="concurrency:join" compatibility="8.1.003" expanded="true" height="82" name="Join" width="90" x="514" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="inner"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -128,7 +128,7 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="nominal_to_date" compatibility="8.1.001" expanded="true" height="82" name="Nominal to Date (3)" width="90" x="313" y="340">
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.003" expanded="true" height="82" name="Nominal to Date (3)" width="90" x="313" y="340">
         <parameter key="attribute_name" value="Date"/>
         <parameter key="date_type" value="date"/>
         <parameter key="date_format" value="MM/dd/yyyy"/>
@@ -136,7 +136,7 @@
         <parameter key="locale" value="English (United States)"/>
         <parameter key="keep_old_attribute" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:join" compatibility="8.1.001" expanded="true" height="82" name="Join (2)" width="90" x="648" y="34">
+      <operator activated="true" class="concurrency:join" compatibility="8.1.003" expanded="true" height="82" name="Join (2)" width="90" x="648" y="34">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="outer"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -145,7 +145,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Remove bad temperature" width="90" x="782" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Remove bad temperature" width="90" x="782" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -155,14 +155,14 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="916" y="34">
+      <operator activated="true" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="916" y="34">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="150000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="1050" y="34">
+      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="1050" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PolicingDataset_Joined_Sampled"/>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Nominal to Date" to_port="example set input"/>
@@ -179,6 +179,7 @@
       <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="663" y="224">In case you run out of memory: enable operator &amp;quot;Sample (Stratified)&amp;quot; in step0</description>
     </process>
   </operator>
 </process>
