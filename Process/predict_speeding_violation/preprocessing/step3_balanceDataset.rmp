@@ -12,37 +12,40 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
+      <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Unbalanced"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="8.1.003" expanded="true" height="82" name="Aggregate" width="90" x="112" y="187">
-        <parameter key="use_default_aggregation" value="false"/>
-        <parameter key="attribute_filter_type" value="all"/>
-        <parameter key="attribute" value=""/>
-        <parameter key="attributes" value=""/>
-        <parameter key="use_except_expression" value="false"/>
-        <parameter key="value_type" value="attribute_value"/>
-        <parameter key="use_value_type_exception" value="false"/>
-        <parameter key="except_value_type" value="time"/>
-        <parameter key="block_type" value="attribute_block"/>
-        <parameter key="use_block_type_exception" value="false"/>
-        <parameter key="except_block_type" value="value_matrix_row_start"/>
-        <parameter key="invert_selection" value="false"/>
-        <parameter key="include_special_attributes" value="false"/>
-        <parameter key="default_aggregation_function" value="average"/>
-        <list key="aggregation_attributes">
-          <parameter key="violation" value="count"/>
+      <operator activated="true" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Filter SPEED violations" width="90" x="45" y="238">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="violation.equals.SPEED"/>
         </list>
-        <parameter key="group_by_attributes" value="violation"/>
-        <parameter key="count_all_combinations" value="false"/>
-        <parameter key="only_distinct" value="false"/>
-        <parameter key="ignore_missings" value="true"/>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+      <operator activated="true" class="multiply" compatibility="8.1.003" expanded="true" height="103" name="Multiply SPEED violations" width="90" x="246" y="85"/>
+      <operator activated="true" class="filter_example_range" compatibility="8.1.003" expanded="true" height="82" name="Filter Example Range" width="90" x="447" y="85">
+        <parameter key="first_example" value="1"/>
+        <parameter key="last_example" value="30960"/>
+        <parameter key="invert_filter" value="false"/>
+      </operator>
+      <operator activated="true" class="append" compatibility="8.1.003" expanded="true" height="124" name="Append" width="90" x="447" y="289">
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+        <parameter key="merge_type" value="all"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="648" y="85">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Balanced"/>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Aggregate" to_port="example set input"/>
-      <connect from_op="Aggregate" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Retrieve" from_port="output" to_op="Filter SPEED violations" to_port="example set input"/>
+      <connect from_op="Filter SPEED violations" from_port="example set output" to_op="Multiply SPEED violations" to_port="input"/>
+      <connect from_op="Filter SPEED violations" from_port="original" to_op="Append" to_port="example set 1"/>
+      <connect from_op="Multiply SPEED violations" from_port="output 1" to_op="Append" to_port="example set 2"/>
+      <connect from_op="Multiply SPEED violations" from_port="output 2" to_op="Filter Example Range" to_port="example set input"/>
+      <connect from_op="Filter Example Range" from_port="example set output" to_op="Append" to_port="example set 3"/>
+      <connect from_op="Append" from_port="merged set" to_op="Store" to_port="input"/>
       <connect from_op="Store" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>

@@ -110,7 +110,7 @@
             </process>
           </operator>
           <operator activated="true" class="log" compatibility="8.1.003" expanded="true" height="82" name="Log" width="90" x="447" y="136">
-            <parameter key="filename" value="C:\Users\Arnold\Desktop\log\log_rule_induction.log"/>
+            <parameter key="filename" value="C:\Users\Arnold\Desktop\LOG\log_rule_induction.log"/>
             <list key="log">
               <parameter key="Criterion" value="operator.Rule Induction.parameter.criterion"/>
               <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
