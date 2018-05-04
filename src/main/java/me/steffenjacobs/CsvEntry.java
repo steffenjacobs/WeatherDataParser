@@ -136,7 +136,7 @@ public class CsvEntry {
 
     private String getDateString() {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.of(this.year, this.month, this.day);
             return formatter.format(localDate);
         } catch(DateTimeException e) {
