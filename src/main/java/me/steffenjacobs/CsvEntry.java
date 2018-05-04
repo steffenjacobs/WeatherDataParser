@@ -2,6 +2,7 @@ package me.steffenjacobs;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static me.steffenjacobs.WeatherRetriever.NUMBER_FORMAT;
 
@@ -134,7 +135,13 @@ public class CsvEntry {
     }
 
     private String getDateString() {
-        return this.year + "-" + this.month + "-" + this.day;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+            LocalDate localDate = LocalDate.of(this.year, this.month, this.day);
+            return formatter.format(localDate);
+        } catch(DateTimeException e) {
+            return "INVALID";
+        }
     }
 
     private void setWeekday() {
