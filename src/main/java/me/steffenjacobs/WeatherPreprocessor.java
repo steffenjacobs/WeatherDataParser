@@ -2,7 +2,6 @@ package me.steffenjacobs;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,18 +17,21 @@ import me.steffenjacobs.domain.DoubleAverageList;
 import me.steffenjacobs.domain.IntegerAverageList;
 import me.steffenjacobs.domain.Wrapper;
 
-public class Preprocessor {
+public class WeatherPreprocessor {
 	
-	private static final Logger LOG = Logger.getLogger(Preprocessor.class.getSimpleName());
+	private static final Logger LOG = Logger.getLogger(WeatherPreprocessor.class.getSimpleName());
 
-    private static String PRECIPITATION = "precipitation";
-    private static String MAX_TEMPERATURE = "maxTemp";
-    private static String MIN_TEMPERATURE = "minTemp";
-    private static String MEAN_TEMPERATURE = "meanTemp";
+    private static final String PRECIPITATION = "precipitation";
+    private static final String MAX_TEMPERATURE = "maxTemp";
+    private static final String MIN_TEMPERATURE = "minTemp";
+    private static final String MEAN_TEMPERATURE = "meanTemp";
 
-    public static void processExcelFile() {
+    private static final String SOURCE_FILE = "weatherData.csv";
+    private static final String TARGET_FILE = "weatherData_preprocessed.csv";
+
+    public static void processCsvFile() {
         Map<CsvEntry, Wrapper> entriesToValues = new HashMap<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(new File("weatherData.csv")))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(SOURCE_FILE)))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if(line.startsWith("COOPID")){
@@ -37,31 +39,20 @@ public class Preprocessor {
                 }
                 createCsvEntry(entriesToValues, line);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createNewExcelFile(entriesToValues);
+        saveToCsvFile(entriesToValues);
     }
 
     private static void createCsvEntry(Map<CsvEntry, Wrapper> entriesToValues, String line) {
         boolean isEqual = false;
         CsvEntry csvEntry = new CsvEntry(line);
         CsvEntry other = null;
-//        System.out.println(entriesToValues.containsKey(csvEntry));
         if (entriesToValues.containsKey(csvEntry)) {
-//        	System.out.println("contin");
         	isEqual = true;
         	other = entriesToValues.get(csvEntry).getLine();
         }
-//        for (CsvEntry entry : entriesToValues.keySet()) {
-//            isEqual = csvEntry.equals(entry);
-//            if (isEqual) {
-//                other = entry;
-//                break;
-//            }
-//        }
         if (isEqual) {
             addCsvEntryToMap(entriesToValues, csvEntry, other);
         } else {
@@ -101,8 +92,8 @@ public class Preprocessor {
         entriesToValues.put(csvEntry, new Wrapper(csvEntry, values));
     }
 
-    private static void createNewExcelFile(Map<CsvEntry, Wrapper> entriesToValues) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData_preprocessed.csv"))) {
+    private static void saveToCsvFile(Map<CsvEntry, Wrapper> entriesToValues) {
+		try (PrintWriter pw = new PrintWriter(new FileWriter(TARGET_FILE))) {
             pw.write("COOPID,YEAR,MONTH,DAY,DATE,PRECIPITATION,IsPrecipitation,MAX TEMP,MIN TEMP, MEAN TEMP,MEAN TEMP" +
                     " (Celsius),COUNTY,WEEKDAY\n");
             for (Map.Entry<CsvEntry, Wrapper> entry : entriesToValues.entrySet()) {
@@ -126,7 +117,7 @@ public class Preprocessor {
     public static void main(String[] args) {
 		LOG.info("Started preprocessing weather data");
 		long now = System.currentTimeMillis();
-		processExcelFile();
+		processCsvFile();
 		LOG.log(Level.INFO, "Finished preprocessing weather data ({0}ms)", System.currentTimeMillis() - now);
     }
 }
