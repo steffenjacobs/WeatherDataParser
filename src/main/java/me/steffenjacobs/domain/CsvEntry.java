@@ -1,4 +1,4 @@
-package me.steffenjacobs;
+package me.steffenjacobs.domain;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

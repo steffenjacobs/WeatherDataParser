@@ -21,6 +21,7 @@ import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import me.steffenjacobs.domain.Station;
 
 public class WeatherRetriever {
 

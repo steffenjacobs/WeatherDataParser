@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.steffenjacobs.domain.Station;
+
 /**
  * This class can load the weather stations from climatecenter.fsu.edu and
  * parses them using their latitude and longitude through geo.fcc.gov to get the

@@ -9,8 +9,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import me.steffenjacobs.domain.AverageList;
+import me.steffenjacobs.domain.CsvEntry;
+import me.steffenjacobs.domain.DoubleAverageList;
+import me.steffenjacobs.domain.IntegerAverageList;
+import me.steffenjacobs.domain.Wrapper;
 
 public class Preprocessor {
+	
+	private static final Logger LOG = Logger.getLogger(Preprocessor.class.getSimpleName());
 
     private static String PRECIPITATION = "precipitation";
     private static String MAX_TEMPERATURE = "maxTemp";
@@ -114,6 +124,9 @@ public class Preprocessor {
     }
 
     public static void main(String[] args) {
-        processExcelFile();
+		LOG.info("Started preprocessing weather data");
+		long now = System.currentTimeMillis();
+		processExcelFile();
+		LOG.log(Level.INFO, "Finished preprocessing weather data ({0}ms)", System.currentTimeMillis() - now);
     }
 }

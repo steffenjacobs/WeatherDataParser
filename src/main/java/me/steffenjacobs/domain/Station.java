@@ -1,4 +1,4 @@
-package me.steffenjacobs;
+package me.steffenjacobs.domain;
 
 /**
  * Domain object of modelling a weather station
