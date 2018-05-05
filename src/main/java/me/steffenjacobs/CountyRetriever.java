@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  */
 public class CountyRetriever {
 
-	private static final Logger log = Logger.getLogger("county-retriever-logger");
+	private static final Logger LOG = Logger.getLogger(CountyRetriever.class.getSimpleName());
 
 	private static final String WEATHER_URL = "https://climatecenter.fsu.edu/climate-data-access-tools/downloadable-data";
 	private static final String AREA_URL = "https://geo.fcc.gov/api/census/area?lat=%s&lon=%s";
@@ -38,7 +38,9 @@ public class CountyRetriever {
 
 	}
 
-	protected static Map<Integer, Station> getCountyForStation() throws MalformedURLException, IOException {
+	protected static Map<Integer, Station> getCountyForStation() throws IOException {
+		final long now = System.currentTimeMillis();
+		LOG.log(Level.INFO, "Starting to retrieve counties for stations");
 		// retrieve web page from climatecenter
 		String htmlString = sendGet(WEATHER_URL);
 		Matcher matcher = PAT_LONGLAT.matcher(htmlString);
@@ -56,16 +58,16 @@ public class CountyRetriever {
 			String html = sendGet(String.format(AREA_URL, station.getLat(), station.getLng()));
 			Matcher matcher2 = PAT_JSON_COUNTY.matcher(html);
 			if (!matcher2.find()) {
-				log.log(Level.SEVERE, "Error: County for station {0} not found.", station.getName());
+				LOG.log(Level.SEVERE, "Error: County for station {0} not found.", station.getName());
 			} else {
 				station.setCounty(matcher2.group(1));
 			}
 
-			log.log(Level.FINE, "{0} ({1}): Lat: {2}, Lng: {3}, County: {4}",
+			LOG.log(Level.FINE, "{0} ({1}): Lat: {2}, Lng: {3}, County: {4}",
 					new Object[] { station.getName(), station.getStationId(), station.getLat(), station.getLng(), station.getCounty() });
 		}
 
-		log.log(Level.INFO, "retrieved counties for {0} stations.\n", stationMap.keySet().size());
+		LOG.log(Level.INFO, "retrieving counties for {0} stations took {1}ms.\n", new Object[] { stationMap.keySet().size(), (System.currentTimeMillis() - now) });
 
 		return stationMap;
 	}
