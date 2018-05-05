@@ -8,8 +8,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -20,17 +18,24 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class WeatherRetriever {
 
-	static DecimalFormat NUMBER_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+	public static final DecimalFormat NUMBER_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
 
-	public static void post() {
+	private static final Logger LOG = Logger.getLogger(WeatherRetriever.class.getSimpleName());
+
+	public static void retrieveWeatherData() {
 		NUMBER_FORMAT.applyPattern("0.00000");
 		Locale.setDefault(new Locale("en", "US"));
 
 		try (PrintWriter pw = new PrintWriter(new FileWriter("weatherData.csv"));) {
 			Map<Integer, Station> countyForStation = CountyRetriever.getCountyForStation();
+			LOG.info("Started retrieving weather data...");
+			long now = System.currentTimeMillis();
 
 			int count = 0;
 			for (int stationId : countyForStation.keySet()) {
@@ -52,10 +57,9 @@ public class WeatherRetriever {
 				StringJoiner sj = new StringJoiner("&");
 				for (Map.Entry<String, String> entry : arguments.entrySet())
 					try {
-						sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-								+ URLEncoder.encode(entry.getValue(), "UTF-8"));
+						sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
 					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
+						LOG.severe(e.getMessage());
 						e.printStackTrace();
 					}
 				byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
@@ -68,12 +72,11 @@ public class WeatherRetriever {
 					os.write(out);
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					LOG.severe(e.getMessage());
 					e.printStackTrace();
 				}
 
 				try (BufferedReader is = new BufferedReader(new InputStreamReader(http.getInputStream()))) {
-					System.out.println("test");
 					String line = "";
 					while ((line = is.readLine()) != null) {
 						if (line.startsWith("COOPID")) {
@@ -85,22 +88,21 @@ public class WeatherRetriever {
 							}
 						} else {
 							String newLine = createLine(countyForStation.get(stationId), line);
-							System.out.print(newLine);
+							LOG.log(Level.FINE, "Retrieved line {0}", newLine);
 							pw.write(newLine);
 						}
 					}
 					http.disconnect();
 				} catch (IOException e) {
+					LOG.severe(e.getMessage());
 					e.printStackTrace();
 				}
+				LOG.log(Level.FINE, "Retrieved weather data for station {0}", stationId);
 			}
-		} catch (ProtocolException e) {
+			LOG.log(Level.INFO, "Retrieved weather data for {0} stations ({1}ms)", new Object[] { countyForStation.size(), (System.currentTimeMillis() - now) });
+		} catch (IOException e) {
+			LOG.severe(e.getMessage());
 			e.printStackTrace();
-		} // PUT is another valid option
-		catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 	}
 
@@ -113,30 +115,30 @@ public class WeatherRetriever {
 			}
 
 			switch (i) {
-				case 3:
-					sb.append(split[1] + "-" + split[2] + "-" + split[3] + ",");
-					break;
-				case 4:
-					sb.append((Double.valueOf(split[4]) > 0 ? true : Double.valueOf(split[4]) < 0 ? "null" : false) + ",");
-					break;
-				case 7:
-					try {
-						String meanTemp = split[7].trim();
-						if (split[7].trim().equals("")) {
-							meanTemp = NUMBER_FORMAT.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
-							sb.append(meanTemp + ",");
-						}
-						if (meanTemp.trim().equals("-99.90000")) {
-							sb.append("-99.99000,");
-						} else {
-							sb.append(NUMBER_FORMAT.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
-						}
-						sb.append(station.getCounty());
-					} catch (NumberFormatException e) {
-						System.err.println("number missing");
-						System.exit(0);
+			case 3:
+				sb.append(split[1] + "-" + split[2] + "-" + split[3] + ",");
+				break;
+			case 4:
+				sb.append((Double.valueOf(split[4]) > 0 ? true : Double.valueOf(split[4]) < 0 ? "null" : false) + ",");
+				break;
+			case 7:
+				try {
+					String meanTemp = split[7].trim();
+					if (split[7].trim().equals("")) {
+						meanTemp = NUMBER_FORMAT.format(((Double.valueOf(split[5]) + Double.valueOf(split[6])) / 2));
+						sb.append(meanTemp + ",");
 					}
-					break;
+					if (meanTemp.trim().equals("-99.90000")) {
+						sb.append("-99.99000,");
+					} else {
+						sb.append(NUMBER_FORMAT.format(((Double.parseDouble(meanTemp) - 32) * 5) / 9) + ",");
+					}
+					sb.append(station.getCounty());
+				} catch (NumberFormatException e) {
+					LOG.severe("number missing");
+					System.exit(0);
+				}
+				break;
 			}
 		}
 		sb.append("\n");
@@ -149,25 +151,23 @@ public class WeatherRetriever {
 		for (int i = 0; i < header.length; i++) {
 			sb.append(header[i] + ",");
 			switch (i) {
-				case 3:
-					sb.append(" DATE,");
-					break;
-				case 4:
-					sb.append(" IsPrecipitation,");
-					break;
-				case 7:
-					sb.append(" MEAN TEMP(Celsius),");
-					sb.append(" COUNTY");
-				default:
-					break;
+			case 3:
+				sb.append(" DATE,");
+				break;
+			case 4:
+				sb.append(" IsPrecipitation,");
+				break;
+			case 7:
+				sb.append(" MEAN TEMP(Celsius),");
+				sb.append(" COUNTY");
+			default:
+				break;
 			}
 		}
 		return sb.toString();
 	}
 
 	public static void main(String[] args) {
-		post();
-		// String a = "34.4,334,";
-		// System.out.println(Arrays.toString(a.split(",")));
+		retrieveWeatherData();
 	}
 }
