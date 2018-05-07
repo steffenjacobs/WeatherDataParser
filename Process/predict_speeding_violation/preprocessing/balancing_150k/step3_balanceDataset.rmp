@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="8.1.003">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="8.1.003" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.1.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -12,10 +12,10 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="retrieve" compatibility="8.1.003" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Unbalanced"/>
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Unbalanced_150k"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="8.1.003" expanded="true" height="82" name="Aggregate Unbalanced Data" width="90" x="179" y="34">
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate Unbalanced Data" width="90" x="179" y="34">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -38,7 +38,7 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Filter SPEED violations" width="90" x="179" y="187">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter SPEED violations" width="90" x="179" y="187">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -48,21 +48,21 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="filter_example_range" compatibility="8.1.003" expanded="true" height="82" name="Filter out rows" width="90" x="380" y="391">
+      <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter out rows" width="90" x="380" y="391">
         <parameter key="first_example" value="1"/>
         <parameter key="last_example" value="34552"/>
         <parameter key="invert_filter" value="false"/>
       </operator>
-      <operator activated="true" class="append" compatibility="8.1.003" expanded="true" height="103" name="Append" width="90" x="380" y="136">
+      <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="380" y="136">
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
         <parameter key="merge_type" value="all"/>
       </operator>
-      <operator activated="true" class="multiply" compatibility="8.1.003" expanded="true" height="103" name="Multiply" width="90" x="581" y="187"/>
-      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="715" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Balanced"/>
+      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="581" y="187"/>
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PreprocessedDataset_Balanced_150k"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="8.1.003" expanded="true" height="82" name="Aggregate Balanced Data" width="90" x="782" y="289">
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate Balanced Data" width="90" x="782" y="289">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
