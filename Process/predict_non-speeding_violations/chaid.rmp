@@ -50,7 +50,7 @@
         <parameter key="automatic_number_of_digits" value="true"/>
         <parameter key="number_of_digits" value="3"/>
       </operator>
-      <operator activated="true" class="optimize_selection" compatibility="8.1.001" expanded="true" height="103" name="Optimize Selection" width="90" x="514" y="34">
+      <operator activated="true" class="optimize_selection" compatibility="8.1.001" expanded="true" height="103" name="Optimize Selection" width="90" x="447" y="34">
         <parameter key="selection_direction" value="forward"/>
         <parameter key="limit_generations_without_improval" value="true"/>
         <parameter key="generations_without_improval" value="1"/>

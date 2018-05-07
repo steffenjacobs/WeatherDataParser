@@ -15,7 +15,7 @@
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_Finished"/>
       </operator>
-      <operator activated="true" class="select_attributes" compatibility="8.1.001" expanded="true" height="82" name="Select Attributes" width="90" x="246" y="34">
+      <operator activated="true" class="select_attributes" compatibility="8.1.001" expanded="true" height="82" name="Select Attributes" width="90" x="179" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
         <parameter key="attribute" value=""/>
         <parameter key="attributes" value="COUNTY|IsPrecipitation|MEAN TEMP (Celsius)|WEEKDAY|daytime|driver_age|driver_gender|driver_race||state|isHoliday|PRECIPITATION|MONTH"/>
@@ -29,7 +29,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="optimize_selection" compatibility="8.1.001" expanded="true" height="103" name="Optimize Selection" width="90" x="447" y="34">
+      <operator activated="true" class="optimize_selection" compatibility="8.1.001" expanded="true" height="103" name="Optimize Selection" width="90" x="380" y="34">
         <parameter key="selection_direction" value="forward"/>
         <parameter key="limit_generations_without_improval" value="true"/>
         <parameter key="generations_without_improval" value="1"/>
