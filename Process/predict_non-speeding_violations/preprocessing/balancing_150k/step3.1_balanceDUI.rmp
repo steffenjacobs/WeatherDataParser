@@ -61,7 +61,7 @@
         <parameter key="ignore_missings" value="true"/>
       </operator>
       <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_1"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_150k_1"/>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Filter DUI violations" to_port="example set input"/>
       <connect from_op="Filter DUI violations" from_port="example set output" to_op="Multiply" to_port="input"/>

@@ -13,30 +13,30 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_9"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_150k_5"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter NONE violations" width="90" x="179" y="34">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter registration violations" width="90" x="179" y="34">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
         <list key="filters_list">
-          <parameter key="filters_entry_key" value="violation.equals.NONE"/>
+          <parameter key="filters_entry_key" value="violation.equals.Registration/plates"/>
         </list>
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="false"/>
       </operator>
       <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter out rows" width="90" x="380" y="34">
         <parameter key="first_example" value="1"/>
-        <parameter key="last_example" value="9624"/>
+        <parameter key="last_example" value="4948"/>
         <parameter key="invert_filter" value="true"/>
       </operator>
-      <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="380" y="238">
+      <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="380" y="136">
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
         <parameter key="merge_type" value="all"/>
       </operator>
-      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply (2)" width="90" x="514" y="238"/>
-      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate" width="90" x="648" y="238">
+      <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply (2)" width="90" x="514" y="136"/>
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate" width="90" x="648" y="136">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -60,11 +60,11 @@
         <parameter key="ignore_missings" value="true"/>
       </operator>
       <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="648" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_Finished"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_150k_6"/>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Filter NONE violations" to_port="example set input"/>
-      <connect from_op="Filter NONE violations" from_port="example set output" to_op="Filter out rows" to_port="example set input"/>
-      <connect from_op="Filter NONE violations" from_port="original" to_op="Append" to_port="example set 1"/>
+      <connect from_op="Retrieve" from_port="output" to_op="Filter registration violations" to_port="example set input"/>
+      <connect from_op="Filter registration violations" from_port="example set output" to_op="Filter out rows" to_port="example set input"/>
+      <connect from_op="Filter registration violations" from_port="original" to_op="Append" to_port="example set 1"/>
       <connect from_op="Filter out rows" from_port="example set output" to_op="Append" to_port="example set 2"/>
       <connect from_op="Append" from_port="merged set" to_op="Multiply (2)" to_port="input"/>
       <connect from_op="Multiply (2)" from_port="output 1" to_op="Store" to_port="input"/>

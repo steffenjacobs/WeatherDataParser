@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_8"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_150k_8"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter lights violations" width="90" x="179" y="34">
         <parameter key="parameter_expression" value=""/>
@@ -61,7 +61,7 @@
         <parameter key="ignore_missings" value="true"/>
       </operator>
       <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="782" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_9"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced_150k_9"/>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Filter lights violations" to_port="example set input"/>
       <connect from_op="Filter lights violations" from_port="example set output" to_op="Multiply (2)" to_port="input"/>

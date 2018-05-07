@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="112" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Balanced"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_150k_Balanced"/>
       </operator>
       <operator activated="true" class="weight_by_information_gain" compatibility="8.1.001" expanded="true" height="82" name="Weight by Information Gain" width="90" x="447" y="34">
         <parameter key="normalize_weights" value="true"/>
