@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Unbalanced"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/NonSpeeding-PreprocessedDataset_Unbalanced_150k"/>
       </operator>
       <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter DUI violations" width="90" x="179" y="34">
         <parameter key="parameter_expression" value=""/>
