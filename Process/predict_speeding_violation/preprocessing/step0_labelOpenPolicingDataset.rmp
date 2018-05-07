@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><process version="8.1.003">
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.001">
   <context>
     <input/>
     <output/>
     <macros/>
   </context>
-  <operator activated="true" class="process" compatibility="8.1.003" expanded="true" name="Process">
+  <operator activated="true" class="process" compatibility="8.1.001" expanded="true" name="Process">
     <parameter key="logverbosity" value="init"/>
     <parameter key="random_seed" value="2001"/>
     <parameter key="send_mail" value="never"/>
@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
-        <parameter key="csv_file" value="C:\Users\Arnold\Desktop\data_set_modified_violations.csv"/>
+        <parameter key="csv_file" value="C:\Users\admin\Desktop\WeatherDataParser\data_set_modified_violations.csv"/>
         <parameter key="column_separators" value=","/>
         <parameter key="trim_lines" value="false"/>
         <parameter key="use_quotes" value="true"/>
@@ -68,7 +68,7 @@
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
       </operator>
-      <operator activated="true" class="filter_examples" compatibility="8.1.003" expanded="true" height="103" name="Filter Examples" width="90" x="45" y="136">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples" width="90" x="45" y="136">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="true"/>
@@ -78,7 +78,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="false"/>
       </operator>
-      <operator activated="true" class="map" compatibility="8.1.003" expanded="true" height="82" name="Map" width="90" x="45" y="289">
+      <operator activated="true" class="map" compatibility="8.1.001" expanded="true" height="82" name="Map" width="90" x="45" y="289">
         <parameter key="attribute_filter_type" value="single"/>
         <parameter key="attribute" value="violation"/>
         <parameter key="attributes" value=""/>
@@ -98,7 +98,7 @@
         <parameter key="add_default_mapping" value="true"/>
         <parameter key="default_value" value="NON-SPEED"/>
       </operator>
-      <operator activated="true" class="text_to_nominal" compatibility="8.1.003" expanded="true" height="82" name="Text to Nominal" width="90" x="246" y="34">
+      <operator activated="true" class="text_to_nominal" compatibility="8.1.001" expanded="true" height="82" name="Text to Nominal" width="90" x="246" y="34">
         <parameter key="attribute_filter_type" value="single"/>
         <parameter key="attribute" value="violation"/>
         <parameter key="attributes" value=""/>
@@ -112,7 +112,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.003" expanded="true" height="103" name="Nominal to Binominal" width="90" x="380" y="187">
+      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Binominal" width="90" x="380" y="187">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
@@ -130,17 +130,17 @@
         <parameter key="transform_binominal" value="false"/>
         <parameter key="use_underscore_in_name" value="false"/>
       </operator>
-      <operator activated="true" class="set_role" compatibility="8.1.003" expanded="true" height="82" name="Set Role" width="90" x="514" y="34">
+      <operator activated="true" class="set_role" compatibility="8.1.001" expanded="true" height="82" name="Set Role" width="90" x="514" y="34">
         <parameter key="attribute_name" value="violation"/>
         <parameter key="target_role" value="label"/>
         <list key="set_additional_roles">
           <parameter key="id" value="id"/>
         </list>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.003" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/Speeding-PolicingDatasetLabeled"/>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="648" y="136">
+      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="648" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
