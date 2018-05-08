@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.1.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="productivity:execute_process" compatibility="8.1.000" expanded="true" height="68" name="Execute step0_labelOpenPolicingDataset" width="90" x="45" y="34">
+        <parameter key="process_location" value="//git-repoi/predict_speeding_violation/preprocessing/step0_labelOpenPolicingDataset"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="productivity:execute_process" compatibility="8.1.000" expanded="true" height="82" name="Execute step1_joinPolicingDataset_with_weatherData_and_publicHolidays" width="90" x="179" y="34">
+        <parameter key="process_location" value="//git-repoi/predict_speeding_violation/preprocessing/balancing_150k/step1_joinPolicingDataset_with_weatherData_and_publicHolidays"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="productivity:execute_process" compatibility="8.1.000" expanded="true" height="82" name="Execute step2_attributeGeneration" width="90" x="313" y="34">
+        <parameter key="process_location" value="//git-repoi/predict_speeding_violation/preprocessing/balancing_150k/step2_attributeGeneration"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="productivity:execute_process" compatibility="8.1.000" expanded="true" height="103" name="Execute step3_balanceDataset" width="90" x="447" y="34">
+        <parameter key="process_location" value="//git-repoi/predict_speeding_violation/preprocessing/balancing_150k/step3_balanceDataset"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <operator activated="true" class="productivity:execute_process" compatibility="8.1.000" expanded="true" height="82" name="Execute step4_determine_attribute_weight" width="90" x="581" y="34">
+        <parameter key="process_location" value="//git-repoi/predict_speeding_violation/preprocessing/balancing_150k/step4_determine_attribute_weight"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="true"/>
+        <parameter key="cache_process" value="true"/>
+        <list key="macros"/>
+        <parameter key="fail_for_unknown_macros" value="true"/>
+      </operator>
+      <connect from_op="Execute step1_joinPolicingDataset_with_weatherData_and_publicHolidays" from_port="result 1" to_op="Execute step2_attributeGeneration" to_port="input 1"/>
+      <connect from_op="Execute step2_attributeGeneration" from_port="result 1" to_op="Execute step3_balanceDataset" to_port="input 1"/>
+      <connect from_op="Execute step3_balanceDataset" from_port="result 1" to_op="Execute step4_determine_attribute_weight" to_port="input 1"/>
+      <connect from_op="Execute step4_determine_attribute_weight" from_port="result 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
