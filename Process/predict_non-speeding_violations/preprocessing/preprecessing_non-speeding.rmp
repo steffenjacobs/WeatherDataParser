@@ -147,6 +147,7 @@
         <list key="macros"/>
         <parameter key="fail_for_unknown_macros" value="true"/>
       </operator>
+      <connect from_port="input 1" to_op="Execute step0_labelOpenPolicingDataset" to_port="input 1"/>
       <connect from_op="Execute step0_labelOpenPolicingDataset" from_port="result 1" to_op="Execute step1_joinPolicingDataset_with_weatherData_and_publicHolidays" to_port="input 1"/>
       <connect from_op="Execute step1_joinPolicingDataset_with_weatherData_and_publicHolidays" from_port="result 1" to_op="Execute step2_attributeGeneration" to_port="input 1"/>
       <connect from_op="Execute step2_attributeGeneration" from_port="result 1" to_op="Execute step3.0_classDistribution_unbalanced" to_port="input 1"/>
@@ -163,6 +164,7 @@
       <connect from_op="Execute step3.10_balanceNONE" from_port="result 1" to_op="Execute step4_determine_attribute_weight" to_port="input 1"/>
       <connect from_op="Execute step4_determine_attribute_weight" from_port="result 1" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
     </process>
