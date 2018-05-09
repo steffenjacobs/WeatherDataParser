@@ -146,14 +146,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="782" y="34">
-        <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="7000"/>
-        <parameter key="sample_ratio" value="0.1"/>
-        <parameter key="use_local_random_seed" value="false"/>
-        <parameter key="local_random_seed" value="1992"/>
-      </operator>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="916" y="34">
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="782" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PolicingDataset_Joined_Sampled_7k"/>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Nominal to Date" to_port="example set input"/>
@@ -165,11 +158,9 @@
       <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
       <connect from_op="Read CSV (3)" from_port="output" to_op="Nominal to Date (3)" to_port="example set input"/>
       <connect from_op="Nominal to Date (3)" from_port="example set output" to_op="Join (2)" to_port="right"/>
-      <connect from_op="Join (2)" from_port="join" to_op="Sample (Stratified)" to_port="example set input"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Join (2)" from_port="join" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="663" y="224">In case you run out of memory: enable operator &amp;quot;Sample (Stratified)&amp;quot; in step0</description>
     </process>
   </operator>
 </process>
