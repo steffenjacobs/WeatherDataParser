@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Balanced_7k"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="8.1.001" expanded="true" height="82" name="Select Attributes" width="90" x="179" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -111,13 +111,11 @@
           <portSpacing port="source_train 3" spacing="0"/>
           <portSpacing port="source_train 4" spacing="0"/>
           <portSpacing port="source_train 5" spacing="0"/>
-          <portSpacing port="source_train 6" spacing="0"/>
           <portSpacing port="sink_model 1" spacing="0"/>
           <portSpacing port="sink_model 2" spacing="0"/>
           <portSpacing port="sink_model 3" spacing="0"/>
           <portSpacing port="sink_model 4" spacing="0"/>
           <portSpacing port="sink_model 5" spacing="0"/>
-          <portSpacing port="sink_model 6" spacing="0"/>
         </process>
       </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Select Attributes" to_port="example set input"/>
