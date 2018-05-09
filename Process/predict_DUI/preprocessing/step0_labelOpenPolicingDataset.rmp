@@ -112,7 +112,7 @@
         <parameter key="invert_selection" value="false"/>
         <parameter key="include_special_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Binominal" width="90" x="380" y="187">
+      <operator activated="true" class="nominal_to_binominal" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Binominal" width="90" x="380" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="single"/>
@@ -137,26 +137,36 @@
           <parameter key="id" value="id"/>
         </list>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="648" y="136">
+      <operator activated="true" class="filter_examples" compatibility="8.1.001" expanded="true" height="103" name="Filter Examples (2)" width="90" x="648" y="34">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="driver_gender.is_not_missing."/>
+          <parameter key="filters_entry_key" value="driver_age.is_not_missing."/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="782" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PolicingDatasetLabeled"/>
+      </operator>
+      <operator activated="false" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="782" y="136">
         <parameter key="sample" value="absolute"/>
         <parameter key="sample_size" value="250000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
       </operator>
-      <operator activated="true" class="store" compatibility="8.1.001" expanded="true" height="68" name="Store" width="90" x="715" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PolicingDatasetLabeled"/>
-      </operator>
       <connect from_op="Read CSV" from_port="output" to_op="Filter Examples" to_port="example set input"/>
       <connect from_op="Filter Examples" from_port="example set output" to_op="Map" to_port="example set input"/>
       <connect from_op="Map" from_port="example set output" to_op="Text to Nominal" to_port="example set input"/>
       <connect from_op="Text to Nominal" from_port="example set output" to_op="Nominal to Binominal" to_port="example set input"/>
       <connect from_op="Nominal to Binominal" from_port="example set output" to_op="Set Role" to_port="example set input"/>
-      <connect from_op="Set Role" from_port="example set output" to_op="Store" to_port="input"/>
-      <connect from_op="Store" from_port="through" to_port="result 1"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Filter Examples (2)" to_port="example set input"/>
+      <connect from_op="Filter Examples (2)" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
-      <portSpacing port="sink_result 2" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="535" y="263">Set role potential problem:&lt;br/&gt;Process works as expected, potential RM bug</description>
     </process>
   </operator>
