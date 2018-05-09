@@ -13,7 +13,7 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Balanced_7k"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Balanced_150k"/>
       </operator>
       <operator activated="true" class="select_attributes" compatibility="8.1.001" expanded="true" height="82" name="Select Attributes" width="90" x="246" y="34">
         <parameter key="attribute_filter_type" value="subset"/>
@@ -53,7 +53,7 @@
             <parameter key="create_view" value="false"/>
           </operator>
           <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="179" y="34"/>
-          <operator activated="true" class="performance_binominal_classification" compatibility="8.1.001" expanded="true" height="82" name="Performance (Binary)" width="90" x="313" y="187">
+          <operator activated="true" class="performance_binominal_classification" compatibility="8.1.001" expanded="true" height="82" name="Performance (Binary)" width="90" x="313" y="136">
             <parameter key="main_criterion" value="first"/>
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
@@ -61,11 +61,11 @@
             <parameter key="AUC (optimistic)" value="false"/>
             <parameter key="AUC" value="false"/>
             <parameter key="AUC (pessimistic)" value="false"/>
-            <parameter key="precision" value="false"/>
-            <parameter key="recall" value="false"/>
+            <parameter key="precision" value="true"/>
+            <parameter key="recall" value="true"/>
             <parameter key="lift" value="false"/>
             <parameter key="fallout" value="false"/>
-            <parameter key="f_measure" value="false"/>
+            <parameter key="f_measure" value="true"/>
             <parameter key="false_positive" value="false"/>
             <parameter key="false_negative" value="false"/>
             <parameter key="true_positive" value="false"/>

@@ -106,11 +106,11 @@
                 <parameter key="AUC (optimistic)" value="false"/>
                 <parameter key="AUC" value="false"/>
                 <parameter key="AUC (pessimistic)" value="false"/>
-                <parameter key="precision" value="false"/>
-                <parameter key="recall" value="false"/>
+                <parameter key="precision" value="true"/>
+                <parameter key="recall" value="true"/>
                 <parameter key="lift" value="false"/>
                 <parameter key="fallout" value="false"/>
-                <parameter key="f_measure" value="false"/>
+                <parameter key="f_measure" value="true"/>
                 <parameter key="false_positive" value="false"/>
                 <parameter key="false_negative" value="false"/>
                 <parameter key="true_positive" value="false"/>

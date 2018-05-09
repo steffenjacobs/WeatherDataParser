@@ -93,15 +93,15 @@
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
             <parameter key="kappa" value="false"/>
-            <parameter key="weighted_mean_recall" value="false"/>
-            <parameter key="weighted_mean_precision" value="false"/>
+            <parameter key="weighted_mean_recall" value="true"/>
+            <parameter key="weighted_mean_precision" value="true"/>
             <parameter key="spearman_rho" value="false"/>
             <parameter key="kendall_tau" value="false"/>
             <parameter key="absolute_error" value="false"/>
             <parameter key="relative_error" value="false"/>
             <parameter key="relative_error_lenient" value="false"/>
             <parameter key="relative_error_strict" value="false"/>
-            <parameter key="normalized_absolute_error" value="false"/>
+            <parameter key="normalized_absolute_error" value="true"/>
             <parameter key="root_mean_squared_error" value="false"/>
             <parameter key="root_relative_squared_error" value="false"/>
             <parameter key="squared_error" value="false"/>
@@ -172,15 +172,15 @@
             <parameter key="accuracy" value="true"/>
             <parameter key="classification_error" value="true"/>
             <parameter key="kappa" value="false"/>
-            <parameter key="weighted_mean_recall" value="false"/>
-            <parameter key="weighted_mean_precision" value="false"/>
+            <parameter key="weighted_mean_recall" value="true"/>
+            <parameter key="weighted_mean_precision" value="true"/>
             <parameter key="spearman_rho" value="false"/>
             <parameter key="kendall_tau" value="false"/>
             <parameter key="absolute_error" value="false"/>
             <parameter key="relative_error" value="false"/>
             <parameter key="relative_error_lenient" value="false"/>
             <parameter key="relative_error_strict" value="false"/>
-            <parameter key="normalized_absolute_error" value="false"/>
+            <parameter key="normalized_absolute_error" value="true"/>
             <parameter key="root_mean_squared_error" value="false"/>
             <parameter key="root_relative_squared_error" value="false"/>
             <parameter key="squared_error" value="false"/>
