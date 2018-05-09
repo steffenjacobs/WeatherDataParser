@@ -155,9 +155,9 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="false" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="916" y="34">
+      <operator activated="true" class="sample_stratified" compatibility="8.1.003" expanded="true" height="82" name="Sample (Stratified)" width="90" x="916" y="34">
         <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="500000"/>
+        <parameter key="sample_size" value="150000"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
@@ -175,7 +175,8 @@
       <connect from_op="Read CSV (3)" from_port="output" to_op="Nominal to Date (3)" to_port="example set input"/>
       <connect from_op="Nominal to Date (3)" from_port="example set output" to_op="Join (2)" to_port="right"/>
       <connect from_op="Join (2)" from_port="join" to_op="Remove bad temperature" to_port="example set input"/>
-      <connect from_op="Remove bad temperature" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Remove bad temperature" from_port="example set output" to_op="Sample (Stratified)" to_port="example set input"/>
+      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Store" to_port="input"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="663" y="224">In case you run out of memory: enable operator &amp;quot;Sample (Stratified)&amp;quot; in step0</description>
