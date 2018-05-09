@@ -104,10 +104,76 @@
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (4)" width="90" x="45" y="340">
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (4)" width="90" x="45" y="544">
         <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate (Filtered DUIs)" width="90" x="179" y="340">
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate (Filtered DUIs)" width="90" x="179" y="544">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="id" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="violation"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (5)" width="90" x="45" y="340">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+      </operator>
+      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (3)" width="90" x="179" y="340">
+        <parameter key="sample" value="absolute"/>
+        <parameter key="sample_size" value="3500"/>
+        <parameter key="sample_ratio" value="0.1"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate (Sample - 3500)" width="90" x="380" y="340">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="id" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="violation"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (6)" width="90" x="45" y="442">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+      </operator>
+      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (4)" width="90" x="179" y="442">
+        <parameter key="sample" value="absolute"/>
+        <parameter key="sample_size" value="75000"/>
+        <parameter key="sample_ratio" value="0.1"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.001" expanded="true" height="82" name="Aggregate (Sample - 75000)" width="90" x="380" y="442">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -139,13 +205,21 @@
       <connect from_op="Sample (2)" from_port="example set output" to_op="Aggregate (Sampled - 150000)" to_port="example set input"/>
       <connect from_op="Aggregate (Sampled - 150000)" from_port="example set output" to_port="result 3"/>
       <connect from_op="Retrieve (4)" from_port="output" to_op="Aggregate (Filtered DUIs)" to_port="example set input"/>
-      <connect from_op="Aggregate (Filtered DUIs)" from_port="example set output" to_port="result 4"/>
+      <connect from_op="Aggregate (Filtered DUIs)" from_port="example set output" to_port="result 6"/>
+      <connect from_op="Retrieve (5)" from_port="output" to_op="Sample (3)" to_port="example set input"/>
+      <connect from_op="Sample (3)" from_port="example set output" to_op="Aggregate (Sample - 3500)" to_port="example set input"/>
+      <connect from_op="Aggregate (Sample - 3500)" from_port="example set output" to_port="result 4"/>
+      <connect from_op="Retrieve (6)" from_port="output" to_op="Sample (4)" to_port="example set input"/>
+      <connect from_op="Sample (4)" from_port="example set output" to_op="Aggregate (Sample - 75000)" to_port="example set input"/>
+      <connect from_op="Aggregate (Sample - 75000)" from_port="example set output" to_port="result 5"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
       <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+      <portSpacing port="sink_result 7" spacing="0"/>
     </process>
   </operator>
 </process>
