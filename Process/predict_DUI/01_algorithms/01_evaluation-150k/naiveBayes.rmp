@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.1.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+      </operator>
+      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="246" y="34">
+        <parameter key="sample" value="absolute"/>
+        <parameter key="sample_size" value="75000"/>
+        <parameter key="sample_ratio" value="0.1"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="447" y="34">
+        <parameter key="split_on_batch_attribute" value="false"/>
+        <parameter key="leave_one_out" value="false"/>
+        <parameter key="number_of_folds" value="10"/>
+        <parameter key="sampling_type" value="stratified sampling"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="289">
+            <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="145" name="Multiply (2)" width="90" x="179" y="289"/>
+          <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter Example Range" width="90" x="246" y="442">
+            <parameter key="first_example" value="1"/>
+            <parameter key="last_example" value="15195"/>
+            <parameter key="invert_filter" value="false"/>
+          </operator>
+          <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="166" name="Append" width="90" x="45" y="34">
+            <parameter key="datamanagement" value="double_array"/>
+            <parameter key="data_management" value="auto"/>
+            <parameter key="merge_type" value="all"/>
+          </operator>
+          <operator activated="true" class="naive_bayes" compatibility="8.1.001" expanded="true" height="82" name="Naive Bayes" width="90" x="179" y="34">
+            <parameter key="laplace_correction" value="true"/>
+          </operator>
+          <connect from_port="training set" to_op="Append" to_port="example set 1"/>
+          <connect from_op="Retrieve (2)" from_port="output" to_op="Multiply (2)" to_port="input"/>
+          <connect from_op="Multiply (2)" from_port="output 1" to_op="Append" to_port="example set 2"/>
+          <connect from_op="Multiply (2)" from_port="output 2" to_op="Append" to_port="example set 3"/>
+          <connect from_op="Multiply (2)" from_port="output 3" to_op="Append" to_port="example set 4"/>
+          <connect from_op="Multiply (2)" from_port="output 4" to_op="Filter Example Range" to_port="example set input"/>
+          <connect from_op="Filter Example Range" from_port="example set output" to_op="Append" to_port="example set 5"/>
+          <connect from_op="Append" from_port="merged set" to_op="Naive Bayes" to_port="training set"/>
+          <connect from_op="Naive Bayes" from_port="model" to_port="model"/>
+          <portSpacing port="source_training set" spacing="0"/>
+          <portSpacing port="sink_model" spacing="0"/>
+          <portSpacing port="sink_through 1" spacing="0"/>
+        </process>
+        <process expanded="true">
+          <operator activated="true" class="apply_model" compatibility="8.1.001" expanded="true" height="82" name="Apply Model" width="90" x="45" y="34">
+            <list key="application_parameters"/>
+            <parameter key="create_view" value="false"/>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="8.1.001" expanded="true" height="103" name="Multiply" width="90" x="179" y="34"/>
+          <operator activated="true" class="performance_binominal_classification" compatibility="8.1.001" expanded="true" height="82" name="Performance (Binary)" width="90" x="313" y="136">
+            <parameter key="main_criterion" value="first"/>
+            <parameter key="accuracy" value="true"/>
+            <parameter key="classification_error" value="true"/>
+            <parameter key="kappa" value="false"/>
+            <parameter key="AUC (optimistic)" value="false"/>
+            <parameter key="AUC" value="false"/>
+            <parameter key="AUC (pessimistic)" value="false"/>
+            <parameter key="precision" value="true"/>
+            <parameter key="recall" value="true"/>
+            <parameter key="lift" value="false"/>
+            <parameter key="fallout" value="false"/>
+            <parameter key="f_measure" value="true"/>
+            <parameter key="false_positive" value="false"/>
+            <parameter key="false_negative" value="false"/>
+            <parameter key="true_positive" value="false"/>
+            <parameter key="true_negative" value="false"/>
+            <parameter key="sensitivity" value="false"/>
+            <parameter key="specificity" value="false"/>
+            <parameter key="youden" value="false"/>
+            <parameter key="positive_predictive_value" value="false"/>
+            <parameter key="negative_predictive_value" value="false"/>
+            <parameter key="psep" value="false"/>
+            <parameter key="skip_undefined_labels" value="true"/>
+            <parameter key="use_example_weights" value="true"/>
+          </operator>
+          <connect from_port="model" to_op="Apply Model" to_port="model"/>
+          <connect from_port="test set" to_op="Apply Model" to_port="unlabelled data"/>
+          <connect from_op="Apply Model" from_port="labelled data" to_op="Multiply" to_port="input"/>
+          <connect from_op="Multiply" from_port="output 1" to_port="test set results"/>
+          <connect from_op="Multiply" from_port="output 2" to_op="Performance (Binary)" to_port="labelled data"/>
+          <connect from_op="Performance (Binary)" from_port="performance" to_port="performance 1"/>
+          <portSpacing port="source_model" spacing="0"/>
+          <portSpacing port="source_test set" spacing="0"/>
+          <portSpacing port="source_through 1" spacing="0"/>
+          <portSpacing port="sink_test set results" spacing="0"/>
+          <portSpacing port="sink_performance 1" spacing="0"/>
+          <portSpacing port="sink_performance 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Retrieve" from_port="output" to_op="Sample (Stratified)" to_port="example set input"/>
+      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
+      <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
+      <connect from_op="Cross Validation" from_port="example set" to_port="result 2"/>
+      <connect from_op="Cross Validation" from_port="test result set" to_port="result 3"/>
+      <connect from_op="Cross Validation" from_port="performance 1" to_port="result 4"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="199" y="225">Please do not change the operator Sample (Stratified) w/o adjusting the upsampling within the Cross Validation.</description>
+    </process>
+  </operator>
+</process>
