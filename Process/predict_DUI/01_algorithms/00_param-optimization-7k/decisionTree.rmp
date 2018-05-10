@@ -15,6 +15,13 @@
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
         <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
       </operator>
+      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="246" y="34">
+        <parameter key="sample" value="absolute"/>
+        <parameter key="sample_size" value="3500"/>
+        <parameter key="sample_ratio" value="0.1"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
       <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.001" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="447" y="34">
         <list key="parameters">
           <parameter key="Decision Tree.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
@@ -36,6 +43,19 @@
             <parameter key="local_random_seed" value="1992"/>
             <parameter key="enable_parallel_execution" value="true"/>
             <process expanded="true">
+              <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="238">
+                <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
+              </operator>
+              <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter Example Range" width="90" x="179" y="238">
+                <parameter key="first_example" value="1"/>
+                <parameter key="last_example" value="3474"/>
+                <parameter key="invert_filter" value="false"/>
+              </operator>
+              <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
+                <parameter key="datamanagement" value="double_array"/>
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+              </operator>
               <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
                 <process expanded="true">
                   <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="8.1.001" expanded="true" height="103" name="Decision Tree" width="90" x="179" y="34">
@@ -55,24 +75,11 @@
                   <portSpacing port="sink_model" spacing="0"/>
                 </process>
               </operator>
-              <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="238">
-                <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
-              </operator>
-              <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
-                <parameter key="datamanagement" value="double_array"/>
-                <parameter key="data_management" value="auto"/>
-                <parameter key="merge_type" value="all"/>
-              </operator>
-              <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter Example Range" width="90" x="179" y="238">
-                <parameter key="first_example" value="1"/>
-                <parameter key="last_example" value="3474"/>
-                <parameter key="invert_filter" value="false"/>
-              </operator>
               <connect from_port="training set" to_op="Append" to_port="example set 1"/>
-              <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
               <connect from_op="Retrieve (2)" from_port="output" to_op="Filter Example Range" to_port="example set input"/>
-              <connect from_op="Append" from_port="merged set" to_op="Tree to Rules" to_port="training set"/>
               <connect from_op="Filter Example Range" from_port="example set output" to_op="Append" to_port="example set 2"/>
+              <connect from_op="Append" from_port="merged set" to_op="Tree to Rules" to_port="training set"/>
+              <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
               <portSpacing port="source_training set" spacing="0"/>
               <portSpacing port="sink_model" spacing="0"/>
               <portSpacing port="sink_through 1" spacing="0"/>
@@ -149,24 +156,16 @@
           <portSpacing port="sink_output 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="246" y="34">
-        <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="3500"/>
-        <parameter key="sample_ratio" value="0.1"/>
-        <parameter key="use_local_random_seed" value="false"/>
-        <parameter key="local_random_seed" value="1992"/>
-      </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Sample (Stratified)" to_port="example set input"/>
+      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Optimize Parameters (Grid)" to_port="input 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="performance" to_port="result 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="model" to_port="result 2"/>
-      <connect from_op="Optimize Parameters (Grid)" from_port="output 1" to_port="result 4"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_port="result 3"/>
+      <connect from_op="Optimize Parameters (Grid)" from_port="output 1" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
-      <portSpacing port="sink_result 5" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="105" y="169">Please do not change the operator Sample (Stratified) w/o adjusting the upsampling within the Cross Validation.</description>
     </process>
   </operator>
