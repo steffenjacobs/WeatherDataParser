@@ -79,11 +79,6 @@
                   <portSpacing port="sink_model" spacing="0"/>
                 </process>
               </operator>
-              <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
-                <parameter key="datamanagement" value="double_array"/>
-                <parameter key="data_management" value="auto"/>
-                <parameter key="merge_type" value="all"/>
-              </operator>
               <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="289">
                 <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
               </operator>
@@ -113,11 +108,17 @@
                 <parameter key="automatic_number_of_digits" value="true"/>
                 <parameter key="number_of_digits" value="3"/>
               </operator>
+              <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
+                <parameter key="datamanagement" value="double_array"/>
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+              </operator>
               <connect from_port="training set" to_op="Append" to_port="example set 1"/>
               <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
               <connect from_op="Retrieve (2)" from_port="output" to_op="Filter Example Range" to_port="example set input"/>
               <connect from_op="Filter Example Range" from_port="example set output" to_op="Discretize (2)" to_port="example set input"/>
               <connect from_op="Discretize (2)" from_port="example set output" to_op="Append" to_port="example set 2"/>
+              <connect from_op="Append" from_port="merged set" to_op="Tree to Rules" to_port="training set"/>
               <portSpacing port="source_training set" spacing="0"/>
               <portSpacing port="sink_model" spacing="0"/>
               <portSpacing port="sink_through 1" spacing="0"/>
