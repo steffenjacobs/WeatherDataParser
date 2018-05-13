@@ -45,27 +45,6 @@
         <parameter key="local_random_seed" value="1992"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
-            <parameter key="datamanagement" value="double_array"/>
-            <parameter key="data_management" value="auto"/>
-            <parameter key="merge_type" value="all"/>
-          </operator>
-          <operator activated="true" class="support_vector_machine_libsvm" compatibility="8.1.001" expanded="true" height="82" name="SVM (C-SVC)" width="90" x="179" y="34">
-            <parameter key="svm_type" value="C-SVC"/>
-            <parameter key="kernel_type" value="rbf"/>
-            <parameter key="degree" value="3"/>
-            <parameter key="gamma" value="0.0"/>
-            <parameter key="coef0" value="0.0"/>
-            <parameter key="C" value="0.0"/>
-            <parameter key="nu" value="0.5"/>
-            <parameter key="cache_size" value="80"/>
-            <parameter key="epsilon" value="0.001"/>
-            <parameter key="p" value="0.1"/>
-            <list key="class_weights"/>
-            <parameter key="shrinking" value="true"/>
-            <parameter key="calculate_confidences" value="false"/>
-            <parameter key="confidence_for_multiclass" value="true"/>
-          </operator>
           <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="340">
             <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling_3500"/>
           </operator>
@@ -90,11 +69,32 @@
             <parameter key="unexpected_value_handling" value="all 0 and warning"/>
             <parameter key="use_underscore_in_name" value="false"/>
           </operator>
+          <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
+            <parameter key="datamanagement" value="double_array"/>
+            <parameter key="data_management" value="auto"/>
+            <parameter key="merge_type" value="all"/>
+          </operator>
+          <operator activated="true" class="support_vector_machine_libsvm" compatibility="8.1.001" expanded="true" height="82" name="SVM (C-SVC)" width="90" x="179" y="34">
+            <parameter key="svm_type" value="C-SVC"/>
+            <parameter key="kernel_type" value="rbf"/>
+            <parameter key="degree" value="3"/>
+            <parameter key="gamma" value="0.0"/>
+            <parameter key="coef0" value="0.0"/>
+            <parameter key="C" value="0.0"/>
+            <parameter key="nu" value="0.5"/>
+            <parameter key="cache_size" value="80"/>
+            <parameter key="epsilon" value="0.001"/>
+            <parameter key="p" value="0.1"/>
+            <list key="class_weights"/>
+            <parameter key="shrinking" value="true"/>
+            <parameter key="calculate_confidences" value="false"/>
+            <parameter key="confidence_for_multiclass" value="true"/>
+          </operator>
           <connect from_port="training set" to_op="Append" to_port="example set 1"/>
-          <connect from_op="Append" from_port="merged set" to_op="SVM (C-SVC)" to_port="training set"/>
-          <connect from_op="SVM (C-SVC)" from_port="model" to_port="model"/>
           <connect from_op="Retrieve (2)" from_port="output" to_op="Nominal to Numerical (2)" to_port="example set input"/>
           <connect from_op="Nominal to Numerical (2)" from_port="example set output" to_op="Append" to_port="example set 2"/>
+          <connect from_op="Append" from_port="merged set" to_op="SVM (C-SVC)" to_port="training set"/>
+          <connect from_op="SVM (C-SVC)" from_port="model" to_port="model"/>
           <portSpacing port="source_training set" spacing="0"/>
           <portSpacing port="sink_model" spacing="0"/>
           <portSpacing port="sink_through 1" spacing="0"/>
