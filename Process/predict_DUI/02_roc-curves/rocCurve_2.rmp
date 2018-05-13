@@ -64,7 +64,7 @@
             <parameter key="gamma" value="0.0"/>
             <parameter key="coef0" value="0.0"/>
             <parameter key="C" value="0.0"/>
-            <parameter key="nu" value="0.1"/>
+            <parameter key="nu" value="0.001"/>
             <parameter key="cache_size" value="80"/>
             <parameter key="epsilon" value="0.001"/>
             <parameter key="p" value="0.1"/>
