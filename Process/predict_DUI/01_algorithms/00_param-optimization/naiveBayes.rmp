@@ -25,12 +25,7 @@
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
           <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="187">
-            <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling"/>
-          </operator>
-          <operator activated="true" class="filter_example_range" compatibility="8.1.001" expanded="true" height="82" name="Filter Example Range" width="90" x="179" y="187">
-            <parameter key="first_example" value="1"/>
-            <parameter key="last_example" value="3474"/>
-            <parameter key="invert_filter" value="false"/>
+            <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling_3500"/>
           </operator>
           <operator activated="true" class="append" compatibility="8.1.001" expanded="true" height="103" name="Append" width="90" x="45" y="34">
             <parameter key="datamanagement" value="double_array"/>
@@ -41,8 +36,7 @@
             <parameter key="laplace_correction" value="true"/>
           </operator>
           <connect from_port="training set" to_op="Append" to_port="example set 1"/>
-          <connect from_op="Retrieve (2)" from_port="output" to_op="Filter Example Range" to_port="example set input"/>
-          <connect from_op="Filter Example Range" from_port="example set output" to_op="Append" to_port="example set 2"/>
+          <connect from_op="Retrieve (2)" from_port="output" to_op="Append" to_port="example set 2"/>
           <connect from_op="Append" from_port="merged set" to_op="Naive Bayes" to_port="training set"/>
           <connect from_op="Naive Bayes" from_port="model" to_port="model"/>
           <portSpacing port="source_training set" spacing="0"/>
