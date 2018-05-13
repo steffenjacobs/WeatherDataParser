@@ -17,7 +17,7 @@
       </operator>
       <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="246" y="34">
         <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="100"/>
+        <parameter key="sample_size" value="3500"/>
         <parameter key="sample_ratio" value="0.1"/>
         <parameter key="use_local_random_seed" value="false"/>
         <parameter key="local_random_seed" value="1992"/>
