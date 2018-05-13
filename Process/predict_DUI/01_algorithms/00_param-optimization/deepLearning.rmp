@@ -13,16 +13,9 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Sampled_3500"/>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="246" y="34">
-        <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="3500"/>
-        <parameter key="sample_ratio" value="0.1"/>
-        <parameter key="use_local_random_seed" value="false"/>
-        <parameter key="local_random_seed" value="1992"/>
-      </operator>
-      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="447" y="34">
+      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation" width="90" x="246" y="34">
         <parameter key="split_on_batch_attribute" value="false"/>
         <parameter key="leave_one_out" value="false"/>
         <parameter key="number_of_folds" value="10"/>
@@ -137,8 +130,7 @@
           <portSpacing port="sink_performance 2" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Sample (Stratified)" to_port="example set input"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
+      <connect from_op="Retrieve" from_port="output" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
       <connect from_op="Cross Validation" from_port="test result set" to_port="result 2"/>
       <connect from_op="Cross Validation" from_port="performance 1" to_port="result 3"/>
@@ -147,7 +139,7 @@
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
-      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="125" y="174">Please do not change the operator Sample (Stratified) w/o adjusting the upsampling within the Cross Validation.</description>
+      <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="89" y="219">Please do not change the operator Sample (Stratified) w/o adjusting the upsampling within the Cross Validation.</description>
     </process>
   </operator>
 </process>

@@ -13,16 +13,9 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Sampled_3500"/>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="179" y="34">
-        <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="3500"/>
-        <parameter key="sample_ratio" value="0.1"/>
-        <parameter key="use_local_random_seed" value="false"/>
-        <parameter key="local_random_seed" value="1992"/>
-      </operator>
-      <operator activated="true" class="nominal_to_numerical" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Numerical" width="90" x="313" y="34">
+      <operator activated="true" class="nominal_to_numerical" compatibility="8.1.001" expanded="true" height="103" name="Nominal to Numerical" width="90" x="179" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
@@ -43,7 +36,7 @@
         <parameter key="unexpected_value_handling" value="all 0 and warning"/>
         <parameter key="use_underscore_in_name" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation (nu-SVC)" width="90" x="447" y="34">
+      <operator activated="true" class="concurrency:cross_validation" compatibility="8.1.001" expanded="true" height="145" name="Cross Validation (nu-SVC)" width="90" x="313" y="34">
         <parameter key="split_on_batch_attribute" value="false"/>
         <parameter key="leave_one_out" value="false"/>
         <parameter key="number_of_folds" value="10"/>
@@ -158,8 +151,7 @@
           <portSpacing port="sink_performance 2" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Sample (Stratified)" to_port="example set input"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Nominal to Numerical" to_port="example set input"/>
+      <connect from_op="Retrieve" from_port="output" to_op="Nominal to Numerical" to_port="example set input"/>
       <connect from_op="Nominal to Numerical" from_port="example set output" to_op="Cross Validation (nu-SVC)" to_port="example set"/>
       <connect from_op="Cross Validation (nu-SVC)" from_port="model" to_port="result 1"/>
       <connect from_op="Cross Validation (nu-SVC)" from_port="test result set" to_port="result 2"/>

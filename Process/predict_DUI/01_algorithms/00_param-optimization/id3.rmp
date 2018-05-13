@@ -13,16 +13,9 @@
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
       <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve" width="90" x="45" y="34">
-        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset"/>
+        <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-PreprocessedDataset_Sampled_3500"/>
       </operator>
-      <operator activated="true" class="sample_stratified" compatibility="8.1.001" expanded="true" height="82" name="Sample (Stratified)" width="90" x="179" y="34">
-        <parameter key="sample" value="absolute"/>
-        <parameter key="sample_size" value="3500"/>
-        <parameter key="sample_ratio" value="0.1"/>
-        <parameter key="use_local_random_seed" value="false"/>
-        <parameter key="local_random_seed" value="1992"/>
-      </operator>
-      <operator activated="true" class="discretize_by_bins" compatibility="8.1.001" expanded="true" height="103" name="Discretize" width="90" x="313" y="34">
+      <operator activated="true" class="discretize_by_bins" compatibility="8.1.001" expanded="true" height="103" name="Discretize" width="90" x="179" y="34">
         <parameter key="return_preprocessing_model" value="false"/>
         <parameter key="create_view" value="false"/>
         <parameter key="attribute_filter_type" value="subset"/>
@@ -43,7 +36,7 @@
         <parameter key="automatic_number_of_digits" value="true"/>
         <parameter key="number_of_digits" value="3"/>
       </operator>
-      <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.001" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="447" y="34">
+      <operator activated="true" class="concurrency:optimize_parameters_grid" compatibility="8.1.001" expanded="true" height="145" name="Optimize Parameters (Grid)" width="90" x="313" y="34">
         <list key="parameters">
           <parameter key="ID3.criterion" value="gain_ratio,information_gain,gini_index,accuracy"/>
           <parameter key="ID3.minimal_size_for_split" value="[1.0;100.0;10;linear]"/>
@@ -196,8 +189,7 @@
           <portSpacing port="sink_output 2" spacing="0"/>
         </process>
       </operator>
-      <connect from_op="Retrieve" from_port="output" to_op="Sample (Stratified)" to_port="example set input"/>
-      <connect from_op="Sample (Stratified)" from_port="example set output" to_op="Discretize" to_port="example set input"/>
+      <connect from_op="Retrieve" from_port="output" to_op="Discretize" to_port="example set input"/>
       <connect from_op="Discretize" from_port="example set output" to_op="Optimize Parameters (Grid)" to_port="input 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="performance" to_port="result 1"/>
       <connect from_op="Optimize Parameters (Grid)" from_port="model" to_port="result 2"/>
