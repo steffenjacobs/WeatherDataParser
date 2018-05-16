@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.1.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.1.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV" width="90" x="45" y="289">
+        <parameter key="csv_file" value="C:\Temp\data_set_original.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="id.true.polynominal.attribute"/>
+          <parameter key="1" value="state.true.polynominal.attribute"/>
+          <parameter key="2" value="stop_date.true.polynominal.attribute"/>
+          <parameter key="3" value="stop_time.true.polynominal.attribute"/>
+          <parameter key="4" value="location_raw.true.polynominal.attribute"/>
+          <parameter key="5" value="county_name.true.polynominal.attribute"/>
+          <parameter key="6" value="county_fips.true.integer.attribute"/>
+          <parameter key="7" value="fine_grained_location.true.polynominal.attribute"/>
+          <parameter key="8" value="police_department.true.attribute_value.attribute"/>
+          <parameter key="9" value="driver_gender.true.polynominal.attribute"/>
+          <parameter key="10" value="driver_age_raw.true.integer.attribute"/>
+          <parameter key="11" value="driver_age.true.real.attribute"/>
+          <parameter key="12" value="driver_race_raw.true.polynominal.attribute"/>
+          <parameter key="13" value="driver_race.true.polynominal.attribute"/>
+          <parameter key="14" value="violation_raw.true.polynominal.attribute"/>
+          <parameter key="15" value="violation.true.polynominal.attribute"/>
+          <parameter key="16" value="search_conducted.true.polynominal.attribute"/>
+          <parameter key="17" value="search_type_raw.true.polynominal.attribute"/>
+          <parameter key="18" value="search_type.true.polynominal.attribute"/>
+          <parameter key="19" value="contraband_found.true.polynominal.attribute"/>
+          <parameter key="20" value="stop_outcome.true.polynominal.attribute"/>
+          <parameter key="21" value="is_arrested.true.polynominal.attribute"/>
+          <parameter key="22" value="officer_id.true.integer.attribute"/>
+          <parameter key="23" value="officer_gender.true.polynominal.attribute"/>
+          <parameter key="24" value="officer_age.true.integer.attribute"/>
+          <parameter key="25" value="officer_race.true.polynominal.attribute"/>
+          <parameter key="26" value="officer_rank.true.polynominal.attribute"/>
+          <parameter key="27" value="out_of_state.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="8.1.000" expanded="true" height="208" name="Multiply (2)" width="90" x="179" y="289"/>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="Race" width="90" x="313" y="595">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="driver_race" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|driver_race"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="Gender" width="90" x="313" y="493">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="driver_gender" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|driver_gender"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="Age" width="90" x="313" y="391">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="driver_age" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|driver_age"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="Violation (Multiple)" width="90" x="313" y="85">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="violation" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|violation"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="nominal_to_date" compatibility="8.1.000" expanded="true" height="82" name="Nominal to Date" width="90" x="313" y="289">
+        <parameter key="attribute_name" value="stop_date"/>
+        <parameter key="date_type" value="date"/>
+        <parameter key="date_format" value="yyyy-MM-dd"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="keep_old_attribute" value="false"/>
+      </operator>
+      <operator activated="true" class="generate_attributes" compatibility="8.1.000" expanded="true" height="82" name="Generate Attributes" width="90" x="514" y="289">
+        <list key="function_descriptions">
+          <parameter key="year" value="date_get(stop_date, DATE_UNIT_YEAR)"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="8.1.000" expanded="true" height="103" name="Multiply" width="90" x="648" y="289"/>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="#stops per year" width="90" x="782" y="289">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="year" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|year"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="#stops" width="90" x="782" y="391">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="year" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value=""/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="County" width="90" x="313" y="187">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="county_name" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="|county_name"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="read_csv" compatibility="8.1.000" expanded="true" height="68" name="Read CSV (2)" width="90" x="45" y="697">
+        <parameter key="csv_file" value="C:\Temp\data_set_modified_violations.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="id.true.polynominal.attribute"/>
+          <parameter key="1" value="state.true.polynominal.attribute"/>
+          <parameter key="2" value="stop_date.true.polynominal.attribute"/>
+          <parameter key="3" value="stop_time.true.polynominal.attribute"/>
+          <parameter key="4" value="location_raw.true.polynominal.attribute"/>
+          <parameter key="5" value="county_name.true.polynominal.attribute"/>
+          <parameter key="6" value="county_fips.true.integer.attribute"/>
+          <parameter key="7" value="fine_grained_location.true.polynominal.attribute"/>
+          <parameter key="8" value="police_department.true.attribute_value.attribute"/>
+          <parameter key="9" value="driver_gender.true.polynominal.attribute"/>
+          <parameter key="10" value="driver_age_raw.true.integer.attribute"/>
+          <parameter key="11" value="driver_age.true.real.attribute"/>
+          <parameter key="12" value="driver_race_raw.true.polynominal.attribute"/>
+          <parameter key="13" value="driver_race.true.polynominal.attribute"/>
+          <parameter key="14" value="violation_raw.true.polynominal.attribute"/>
+          <parameter key="15" value="violation.true.polynominal.attribute"/>
+          <parameter key="16" value="search_conducted.true.polynominal.attribute"/>
+          <parameter key="17" value="search_type_raw.true.polynominal.attribute"/>
+          <parameter key="18" value="search_type.true.polynominal.attribute"/>
+          <parameter key="19" value="contraband_found.true.polynominal.attribute"/>
+          <parameter key="20" value="stop_outcome.true.polynominal.attribute"/>
+          <parameter key="21" value="is_arrested.true.polynominal.attribute"/>
+          <parameter key="22" value="officer_id.true.integer.attribute"/>
+          <parameter key="23" value="officer_gender.true.polynominal.attribute"/>
+          <parameter key="24" value="officer_age.true.integer.attribute"/>
+          <parameter key="25" value="officer_race.true.polynominal.attribute"/>
+          <parameter key="26" value="officer_rank.true.polynominal.attribute"/>
+          <parameter key="27" value="out_of_state.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="8.1.000" expanded="true" height="82" name="Multiply (3)" width="90" x="179" y="697"/>
+      <operator activated="true" class="aggregate" compatibility="8.1.000" expanded="true" height="82" name="Violation (Single)" width="90" x="380" y="697">
+        <parameter key="use_default_aggregation" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_aggregation_function" value="average"/>
+        <list key="aggregation_attributes">
+          <parameter key="violation" value="count"/>
+        </list>
+        <parameter key="group_by_attributes" value="violation|"/>
+        <parameter key="count_all_combinations" value="false"/>
+        <parameter key="only_distinct" value="false"/>
+        <parameter key="ignore_missings" value="true"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_op="Nominal to Date" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="County" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 3" to_op="Violation (Multiple)" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 4" to_port="result 5"/>
+      <connect from_op="Multiply (2)" from_port="output 5" to_op="Age" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 6" to_op="Gender" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 7" to_op="Race" to_port="example set input"/>
+      <connect from_op="Race" from_port="example set output" to_port="result 8"/>
+      <connect from_op="Gender" from_port="example set output" to_port="result 7"/>
+      <connect from_op="Age" from_port="example set output" to_port="result 6"/>
+      <connect from_op="Violation (Multiple)" from_port="example set output" to_port="result 2"/>
+      <connect from_op="Nominal to Date" from_port="example set output" to_op="Generate Attributes" to_port="example set input"/>
+      <connect from_op="Generate Attributes" from_port="example set output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="#stops per year" to_port="example set input"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="#stops" to_port="example set input"/>
+      <connect from_op="#stops per year" from_port="example set output" to_port="result 3"/>
+      <connect from_op="#stops" from_port="example set output" to_port="result 4"/>
+      <connect from_op="County" from_port="example set output" to_port="result 1"/>
+      <connect from_op="Read CSV (2)" from_port="output" to_op="Multiply (3)" to_port="input"/>
+      <connect from_op="Multiply (3)" from_port="output 1" to_op="Violation (Single)" to_port="example set input"/>
+      <connect from_op="Violation (Single)" from_port="example set output" to_port="result 9"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+      <portSpacing port="sink_result 7" spacing="0"/>
+      <portSpacing port="sink_result 8" spacing="0"/>
+      <portSpacing port="sink_result 9" spacing="0"/>
+      <portSpacing port="sink_result 10" spacing="0"/>
+    </process>
+  </operator>
+</process>
