@@ -45,20 +45,6 @@
         <parameter key="local_random_seed" value="1992"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
-            <process expanded="true">
-              <operator activated="true" class="id3" compatibility="8.1.001" expanded="true" height="82" name="ID3" width="90" x="246" y="34">
-                <parameter key="criterion" value="gini_index"/>
-                <parameter key="minimal_size_for_split" value="4"/>
-                <parameter key="minimal_leaf_size" value="2"/>
-                <parameter key="minimal_gain" value="0.1"/>
-              </operator>
-              <connect from_port="training set" to_op="ID3" to_port="training set"/>
-              <connect from_op="ID3" from_port="model" to_port="model"/>
-              <portSpacing port="source_training set" spacing="0"/>
-              <portSpacing port="sink_model" spacing="0"/>
-            </process>
-          </operator>
           <operator activated="true" class="retrieve" compatibility="8.1.001" expanded="true" height="68" name="Retrieve (2)" width="90" x="45" y="289">
             <parameter key="repository_entry" value="//Local Repository/data/Project/DUI-Entries-For-UpSampling_3500"/>
           </operator>
@@ -88,11 +74,25 @@
             <parameter key="data_management" value="auto"/>
             <parameter key="merge_type" value="all"/>
           </operator>
+          <operator activated="true" class="tree_to_rules" compatibility="8.1.001" expanded="true" height="82" name="Tree to Rules" width="90" x="179" y="34">
+            <process expanded="true">
+              <operator activated="true" class="id3" compatibility="8.1.001" expanded="true" height="82" name="ID3" width="90" x="246" y="34">
+                <parameter key="criterion" value="gini_index"/>
+                <parameter key="minimal_size_for_split" value="4"/>
+                <parameter key="minimal_leaf_size" value="2"/>
+                <parameter key="minimal_gain" value="0.1"/>
+              </operator>
+              <connect from_port="training set" to_op="ID3" to_port="training set"/>
+              <connect from_op="ID3" from_port="model" to_port="model"/>
+              <portSpacing port="source_training set" spacing="0"/>
+              <portSpacing port="sink_model" spacing="0"/>
+            </process>
+          </operator>
           <connect from_port="training set" to_op="Append" to_port="example set 1"/>
-          <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
           <connect from_op="Retrieve (2)" from_port="output" to_op="Discretize (2)" to_port="example set input"/>
           <connect from_op="Discretize (2)" from_port="example set output" to_op="Append" to_port="example set 2"/>
           <connect from_op="Append" from_port="merged set" to_op="Tree to Rules" to_port="training set"/>
+          <connect from_op="Tree to Rules" from_port="model" to_port="model"/>
           <portSpacing port="source_training set" spacing="0"/>
           <portSpacing port="sink_model" spacing="0"/>
           <portSpacing port="sink_through 1" spacing="0"/>
@@ -143,26 +143,11 @@
           <portSpacing port="sink_performance 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="514" y="136">
-        <parameter key="filename" value="C:\Temp\log\dui\log_id3.log"/>
-        <list key="log">
-          <parameter key="Criterion" value="operator.ID3.parameter.criterion"/>
-          <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
-          <parameter key="StdDeviation" value="operator.Cross Validation.value.std deviation 1"/>
-          <parameter key="Minimal size for split" value="operator.ID3.parameter.minimal_size_for_split"/>
-          <parameter key="Minimal leaf size" value="operator.ID3.parameter.minimal_leaf_size"/>
-          <parameter key="Minimal gain" value="operator.ID3.parameter.minimal_gain"/>
-        </list>
-        <parameter key="sorting_type" value="none"/>
-        <parameter key="sorting_k" value="100"/>
-        <parameter key="persistent" value="false"/>
-      </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Discretize" to_port="example set input"/>
       <connect from_op="Discretize" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
       <connect from_op="Cross Validation" from_port="example set" to_port="result 2"/>
-      <connect from_op="Cross Validation" from_port="performance 1" to_op="Log" to_port="through 1"/>
-      <connect from_op="Log" from_port="through 1" to_port="result 3"/>
+      <connect from_op="Cross Validation" from_port="performance 1" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>

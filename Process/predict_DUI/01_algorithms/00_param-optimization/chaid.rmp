@@ -147,27 +147,11 @@
           <portSpacing port="sink_performance 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="log" compatibility="8.1.001" expanded="true" height="82" name="Log" width="90" x="581" y="187">
-        <parameter key="filename" value="C:\Temp\log\dui\log_chaid.log"/>
-        <list key="log">
-          <parameter key="PerformancMainCrit" value="operator.Cross Validation.value.performance main criterion"/>
-          <parameter key="StdDeviation" value="operator.Cross Validation.value.std deviation 1"/>
-          <parameter key="Minimal size for split" value="operator.CHAID.parameter.minimal_size_for_split"/>
-          <parameter key="Minimal leaf size" value="operator.CHAID.parameter.minimal_leaf_size"/>
-          <parameter key="Minimal gain" value="operator.CHAID.parameter.minimal_gain"/>
-          <parameter key="Maximal depth" value="operator.CHAID.parameter.maximal_depth"/>
-          <parameter key="Confidence" value="operator.CHAID.parameter.confidence"/>
-        </list>
-        <parameter key="sorting_type" value="none"/>
-        <parameter key="sorting_k" value="100"/>
-        <parameter key="persistent" value="false"/>
-      </operator>
       <connect from_op="Retrieve" from_port="output" to_op="Discretize" to_port="example set input"/>
       <connect from_op="Discretize" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
       <connect from_op="Cross Validation" from_port="test result set" to_port="result 2"/>
-      <connect from_op="Cross Validation" from_port="performance 1" to_op="Log" to_port="through 1"/>
-      <connect from_op="Log" from_port="through 1" to_port="result 3"/>
+      <connect from_op="Cross Validation" from_port="performance 1" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
