@@ -150,6 +150,7 @@
       <connect from_op="Retrieve" from_port="output" to_op="Discretize" to_port="example set input"/>
       <connect from_op="Discretize" from_port="example set output" to_op="Cross Validation" to_port="example set"/>
       <connect from_op="Cross Validation" from_port="model" to_port="result 1"/>
+      <connect from_op="Cross Validation" from_port="example set" to_port="result 4"/>
       <connect from_op="Cross Validation" from_port="test result set" to_port="result 2"/>
       <connect from_op="Cross Validation" from_port="performance 1" to_port="result 3"/>
       <portSpacing port="source_input 1" spacing="0"/>
@@ -157,6 +158,7 @@
       <portSpacing port="sink_result 2" spacing="0"/>
       <portSpacing port="sink_result 3" spacing="0"/>
       <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
       <description align="center" color="yellow" colored="false" height="105" resized="false" width="180" x="72" y="193">Please do not change the operator Sample (Stratified) w/o adjusting the upsampling within the Cross Validation.</description>
     </process>
   </operator>
